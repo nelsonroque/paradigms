@@ -1,0 +1,277 @@
+---
+API: 2.1
+OpenSesame: 3.2.6
+Platform: nt
+---
+set width 1024
+set uniform_coordinates yes
+set title "RSVP Lie Project"
+set subject_parity even
+set subject_nr 0
+set start experiment
+set sound_sample_size -16
+set sound_freq 48000
+set sound_channels 2
+set sound_buf_size 1024
+set sampler_backend legacy
+set round_decimals 2
+set mouse_backend xpyriment
+set keyboard_backend legacy
+set height 768
+set fullscreen no
+set form_clicks no
+set foreground white
+set font_underline no
+set font_size 18
+set font_italic no
+set font_family mono
+set font_bold no
+set experiment_path "C:\\Users\\nur375\\Documents\\GitHub\\paradigms\\rsvp"
+set disable_garbage_collection yes
+set description "The main experiment item"
+set coordinates uniform
+set compensation 0
+set color_backend legacy
+set clock_backend legacy
+set canvas_backend xpyriment
+set bidi no
+set background black
+
+define inline_script LIBRARIES
+	set description "Executes Python code"
+	set _run ""
+	___prepare__
+	from random import shuffle, choice
+	import time
+	__end__
+
+define inline_script PARAMETERS
+	set description "Executes Python code"
+	set _run ""
+	___prepare__
+	var.background_color = "white"
+	var.fixation_dot_color = "black"
+	var.target_letter_color = "green"
+	var.other_letters_color = "gray"
+	var.presentation_time = 90
+	var.isi_time = 45
+	var.stream_font_size = 90
+	var.fixation_periods = [500,700,1000]
+	var.distractor_size = 50
+	__end__
+
+define sequence experiment
+	set flush_keyboard yes
+	set description "Runs a number of items in sequence"
+	run PARAMETERS always
+	run LIBRARIES always
+	run trial_table always
+
+define inline_script fixation
+	set description "Executes Python code"
+	___run__
+	# draw fixation dot on screen
+	my_canvas.fixdot(color=var.fixation_dot_color)
+	my_canvas.show()
+	self.sleep(var.fixation_period_trial)
+	my_canvas.clear()
+	__end__
+	___prepare__
+	# set canvas color
+	my_canvas = canvas(background_color=var.background_color)
+	
+	# choose random choice of fixation
+	var.fixation_period_trial = choice(var.fixation_periods)
+	__end__
+
+define sketchpad respond
+	set duration keypress
+	set description "Displays stimuli"
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=24 html=yes show_if=always text="Report the [target_letter_color] letter" x=0 y=0 z_index=0
+
+define logger save_data
+	set description "Logs experimental data"
+	set auto_log yes
+
+define inline_script stream_presentation
+	set description "Executes Python code"
+	___run__
+	for letter in var.prep_stream:
+		# draw distractor if a distractor trial
+		if stream_index == var.distractor_position:
+			var.distractor_letter = letter
+			if var.distractor_identity == "square":
+				my_canvas.rect(var.distractor_location_x, var.distractor_location_y, var.distractor_size , var.distractor_size , color=var.distractor_color, fill=True)
+				my_canvas.rect(var.distractor_location_x*-1, var.distractor_location_y, var.distractor_size , var.distractor_size , color=var.distractor_color, fill=True)
+				my_canvas.rect(var.distractor_location_x, var.distractor_location_y*-1, var.distractor_size , var.distractor_size , color=var.distractor_color, fill=True)
+				my_canvas.rect(var.distractor_location_x*-1, var.distractor_location_y*-1, var.distractor_size , var.distractor_size , color=var.distractor_color, fill=True)
+			elif var.distractor_identity == "circle":
+				my_canvas.ellipse(var.distractor_location_x, var.distractor_location_y, var.distractor_size , var.distractor_size , color=var.distractor_color, fill=True)
+				my_canvas.ellipse(var.distractor_location_x*-1, var.distractor_location_y, var.distractor_size , var.distractor_size , color=var.distractor_color, fill=True)
+				my_canvas.ellipse(var.distractor_location_x, var.distractor_location_y*-1, var.distractor_size , var.distractor_size , color=var.distractor_color, fill=True)
+				my_canvas.ellipse(var.distractor_location_x*-1, var.distractor_location_y*-1, var.distractor_size , var.distractor_size , color=var.distractor_color, fill=True)
+			else:
+				my_canvas.text(text=str(var.distractor_identity), x=var.distractor_location_x, y=var.distractor_location_y, color=var.distractor_color)
+				my_canvas.text(text=str(var.distractor_identity), x=var.distractor_location_x*-1, y=var.distractor_location_y, color=var.distractor_color)
+				my_canvas.text(text=str(var.distractor_identity), x=var.distractor_location_x, y=var.distractor_location_y*-1, color=var.distractor_color)
+				my_canvas.text(text=str(var.distractor_identity), x=var.distractor_location_x*-1, y=var.distractor_location_y*-1, color=var.distractor_color)
+		#--------------------------------------------------------
+		# choose color for item
+		if letter == var.target_letter:
+			my_canvas.text(text=letter, x=0, y=0, color=var.target_letter_color)
+		else:
+			my_canvas.text(text=letter, x=0, y=0, color=var.other_letters_color)
+		#--------------------------------------------------------
+		word_on = time.clock() # get timing information
+		my_canvas.show() # show stimuli
+		self.sleep(var.presentation_time) # wait for each letter
+		word_off = time.clock() # get timing information
+		word_presentation_list.append(str(word_off - word_on))
+		#--------------------------------------------------------
+		my_canvas.clear()
+		my_canvas.show()
+		self.sleep(var.isi_time) # wait for after each letter
+		#--------------------------------------------------------
+		stream_index += 1 # increment after each trial
+	
+	var.word_total_time = word_presentation_list # save presentation timing data
+	__end__
+	___prepare__
+	# calculate distractor index for inserting
+	var.distractor_position = var.target_position + var.distractor_position_relative_to_target
+	
+	# extract all letters
+	var.all_letters = [var.letter1,var.letter2,var.letter3,var.letter4,var.letter5,var.letter6,var.letter7,var.letter8,var.letter9,var.letter10]
+	
+	# create copies of shuffled list
+	var.listA = var.all_letters[:]
+	var.listB = var.all_letters[:]
+	var.listC = var.all_letters[:]
+	var.listD = var.all_letters[:]
+	
+	# shuffle all lists in place
+	shuffle(var.listA)
+	shuffle(var.listB)
+	shuffle(var.listC)
+	shuffle(var.listD)
+	
+	# compile all shuffled lists
+	var.total_stream = var.listA + var.listB + var.listC + var.listD
+	
+	# insert target into stream
+	var.prep_stream = var.total_stream[:]
+	var.prep_stream[var.target_position:var.target_position] = var.target_letter
+	
+	# set canvas background color
+	my_canvas = canvas(background_color=var.background_color)
+	
+	# set canvas font size
+	my_canvas.set_font('mono', var.stream_font_size)
+	
+	# init list for timing data
+	word_presentation_list = list() 
+	
+	# initialize stream index
+	stream_index = 0
+	__end__
+
+define sequence trial_sequence
+	set flush_keyboard yes
+	set description "Runs a number of items in sequence"
+	run fixation always
+	run stream_presentation always
+	run respond always
+	run save_data always
+
+define loop trial_table
+	set source_file ""
+	set source table
+	set repeat 1
+	set order random
+	set description "Repeatedly runs another item"
+	set cycles 4
+	set continuous no
+	set break_if_on_first yes
+	set break_if never
+	setcycle 0 trial_type lie
+	setcycle 0 trial_cue L
+	setcycle 0 letter1 A
+	setcycle 0 letter2 B
+	setcycle 0 letter3 C
+	setcycle 0 letter4 D
+	setcycle 0 letter5 E
+	setcycle 0 letter6 F
+	setcycle 0 letter7 G
+	setcycle 0 letter8 H
+	setcycle 0 letter9 I
+	setcycle 0 letter10 J
+	setcycle 0 target_letter K
+	setcycle 0 target_position 10
+	setcycle 0 distractor_position_relative_to_target -3
+	setcycle 0 distractor_location_x 100
+	setcycle 0 distractor_location_y 100
+	setcycle 0 distractor_present Y
+	setcycle 0 distractor_color green
+	setcycle 0 distractor_identity "#"
+	setcycle 1 trial_type lie
+	setcycle 1 trial_cue T
+	setcycle 1 letter1 A
+	setcycle 1 letter2 B
+	setcycle 1 letter3 C
+	setcycle 1 letter4 D
+	setcycle 1 letter5 E
+	setcycle 1 letter6 F
+	setcycle 1 letter7 G
+	setcycle 1 letter8 H
+	setcycle 1 letter9 I
+	setcycle 1 letter10 J
+	setcycle 1 target_letter K
+	setcycle 1 target_position 10
+	setcycle 1 distractor_position_relative_to_target -2
+	setcycle 1 distractor_location_x 100
+	setcycle 1 distractor_location_y 100
+	setcycle 1 distractor_present Y
+	setcycle 1 distractor_color green
+	setcycle 1 distractor_identity "#"
+	setcycle 2 trial_type lie
+	setcycle 2 trial_cue L
+	setcycle 2 letter1 A
+	setcycle 2 letter2 B
+	setcycle 2 letter3 C
+	setcycle 2 letter4 D
+	setcycle 2 letter5 E
+	setcycle 2 letter6 F
+	setcycle 2 letter7 G
+	setcycle 2 letter8 H
+	setcycle 2 letter9 I
+	setcycle 2 letter10 J
+	setcycle 2 target_letter K
+	setcycle 2 target_position 10
+	setcycle 2 distractor_position_relative_to_target -1
+	setcycle 2 distractor_location_x 100
+	setcycle 2 distractor_location_y 100
+	setcycle 2 distractor_present Y
+	setcycle 2 distractor_color green
+	setcycle 2 distractor_identity "#"
+	setcycle 3 trial_type lie
+	setcycle 3 trial_cue T
+	setcycle 3 letter1 A
+	setcycle 3 letter2 B
+	setcycle 3 letter3 C
+	setcycle 3 letter4 D
+	setcycle 3 letter5 E
+	setcycle 3 letter6 F
+	setcycle 3 letter7 G
+	setcycle 3 letter8 H
+	setcycle 3 letter9 I
+	setcycle 3 letter10 J
+	setcycle 3 target_letter K
+	setcycle 3 target_position 10
+	setcycle 3 distractor_position_relative_to_target 0
+	setcycle 3 distractor_location_x 100
+	setcycle 3 distractor_location_y 100
+	setcycle 3 distractor_present Y
+	setcycle 3 distractor_color green
+	setcycle 3 distractor_identity "#"
+	run trial_sequence
+
