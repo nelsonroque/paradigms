@@ -1,0 +1,1588 @@
+---
+API: 2
+OpenSesame: 3.1.9
+Platform: nt
+---
+set width 1024
+set uniform_coordinates yes
+set title EXP2
+set subject_parity even
+set subject_nr 0
+set start experiment
+set sound_sample_size -16
+set sound_freq 48000
+set sound_channels 2
+set sound_buf_size 1024
+set sampler_backend legacy
+set round_decimals 2
+set mouse_backend legacy
+set keyboard_backend legacy
+set height 768
+set fullscreen no
+set form_clicks no
+set foreground white
+set font_underline no
+set font_size 18
+set font_italic no
+set font_family mono
+set font_bold no
+set experiment_path "C:\\Users\\Boot\\Desktop\\PolarCap\\ALPHA"
+set disable_garbage_collection yes
+set description "Code by Nelson Roque"
+set coordinates uniform
+set compensation 0
+set color_backend legacy
+set clock_backend legacy
+set canvas_backend legacy
+set bidi no
+set background black
+
+define sequence Instructions
+	set flush_keyboard yes
+	set description "Runs a number of items in sequence"
+	run key_instruct always
+	run key_commands always
+	run maintain_fixation always
+	run distractor_instruct always
+	run instructions_feedback always
+
+define inline_script PARAMETERS
+	set description "Executes Python code"
+	set _run ""
+	___prepare__
+	# annulus parameters
+	var.eccentricity = 250
+	
+	# stimuli parameters
+	var.circle_thickness = 3
+	var.square_length = 80
+	var.target_color = "green"
+	var.distractor_colors = ["red","green"]
+	
+	# line parameters
+	var.line_thickness = 3
+	var.premask_line_thickness = 2
+	var.line_prop_size = .6
+	var.line_height = round((var.square_length*var.line_prop_size),0)
+	
+	# fixation parameters
+	var.fix_cross_px = 36
+	var.fix_cross_ms = 600
+	var.fix_dot_ms = 600
+	
+	# trial timeout window
+	var.response_timeout = 2000
+	
+	# condition assignment
+	var.BLOCK_ORDER = "PA"
+	var.CONDITION_ORDER = "ONSET"
+	__end__
+
+define sketchpad break_instruct
+	set duration keypress
+	set description "Displays stimuli"
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=24 html=yes show_if=always text="You may now take a brief break.<br /><br /><br /><br /><br />Press any key to continue" x=0 y=0 z_index=0
+
+define sketchpad distractor_instruct
+	set duration keypress
+	set description "Displays stimuli"
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=18 html=yes show_if=always text="Throughout this experiment, on some trials, <br />an irrelevant item may appear.<br /><br /><br /><br />When it appears, this irrelevant item will<br />abruptly appear in the display." x=0 y=-160 z_index=0
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=18 html=yes show_if=always text="Press any key to continue ..." x=0 y=256 z_index=0
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=18 html=yes show_if=always text="Ignore this unique item, <br />as it is irrelevant to your task, <br />and only respond to <br />the orientation of the line<br />within the green circle." x=0 y=32 z_index=0
+
+define sketchpad exp_complete
+	set duration 5000
+	set description "Displays stimuli"
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=18 html=yes show_if=always text="Experiment Complete!<br /><br />Please open the door to notify your experimenter" x=0 y=0 z_index=0
+
+define sequence experiment
+	set flush_keyboard yes
+	set description "Runs a number of items in sequence"
+	run PARAMETERS always
+	run Instructions always
+	run practice_next always
+	run onset_present always
+	run onset_PRESENT_PRACTICE always
+	run experiment_next always
+	run remember_fixate always
+	run onset_present always
+	run onset_PRESENT_EXP always
+	run break_instruct always
+	run Instructions always
+	run practice_next always
+	run onset_absent always
+	run onset_ABSENT_PRACTICE always
+	run experiment_next always
+	run remember_fixate always
+	run onset_absent always
+	run onset_ABSENT_EXP always
+	run exp_complete always
+
+define sketchpad experiment_next
+	set duration keypress
+	set description "Displays stimuli"
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=24 html=yes show_if=always text="Experiment trials are next.<br /><br />Press any key to continue" x=0 y=0 z_index=0
+
+define sketchpad instructions_feedback
+	set duration keypress
+	set description "Displays stimuli"
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=18 html=yes show_if=always text="After each trial, the fixation dot <br />in the center of the screen <br />will change to either <br />green, orange, or red, <br />to illustrate your accuracy." x=0 y=-160 z_index=0
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=18 html=yes show_if=always text="Press any key to continue ..." x=0 y=256 z_index=0
+	draw fixdot color=green show_if=always style=default x=-160 y=0 z_index=0
+	draw fixdot color=red show_if=always style=default x=192 y=0 z_index=0
+	draw textline center=1 color=green font_bold=no font_family=mono font_italic=no font_size=18 html=yes show_if=always text=Correct x=-160 y=32 z_index=0
+	draw textline center=1 color=red font_bold=no font_family=mono font_italic=no font_size=18 html=yes show_if=always text=Incorrect x=192 y=32 z_index=0
+	draw textline center=1 color=orange font_bold=no font_family=mono font_italic=no font_size=18 html=yes show_if=always text=Timeout x=0 y=32 z_index=0
+	draw fixdot color=orange show_if=always style=default x=0 y=0 z_index=0
+
+define sketchpad key_commands
+	set start_response_interval no
+	set duration keypress
+	set description "Present instruction for the form condition"
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=24 html=yes show_if=always text="If the line within the green circle is:" x=0 y=-160 z_index=0
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=18 html=yes show_if=always text="" x=0 y=0 z_index=0
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=18 html=yes show_if=always text="Press any key to continue ..." x=0 y=288 z_index=0
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=18 html=yes show_if=always text="Horizontal = 'z'-key" x=-288 y=32 z_index=0
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=18 html=yes show_if=always text="Vertical = '/'-key" x=288 y=32 z_index=0
+	draw circle color=green fill=0 penwidth=3 r=40 show_if=always x=-288 y=-64 z_index=0
+	draw circle color=green fill=0 penwidth=3 r=40 show_if=always x=288 y=-64 z_index=0
+	draw line color=white penwidth=2 show_if=always x1=-310 x2=-266 y1=-64 y2=-64 z_index=0
+	draw line color=white penwidth=2 show_if=always x1=288 x2=288 y1=-86 y2=-42 z_index=0
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=18 html=yes show_if=always text="Please place one finger on each key now. <br /><br />You may use these keys to advance instructions." x=0 y=160 z_index=0
+
+define sketchpad key_instruct
+	set start_response_interval no
+	set duration keypress
+	set description "Present instruction for the form condition"
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=24 html=yes show_if=always text="Your goal in this task is to report <br />the orientation of the line in the green circle" x=0 y=-128 z_index=0
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=18 html=yes show_if=always text="" x=0 y=0 z_index=0
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=18 html=yes show_if=always text="Press any key to continue ..." x=0 y=288 z_index=0
+	draw circle color=green fill=0 penwidth=3 r=40 show_if=always x=0 y=0 z_index=0
+	draw line color=white penwidth=2 show_if=always x1=-22 x2=22 y1=0 y2=0 z_index=0
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=24 html=yes show_if=always text="A green circle will appear in a display,<br />amongst a total of 7 items." x=0 y=128 z_index=0
+
+define sketchpad maintain_fixation
+	set duration keypress
+	set description "Displays stimuli"
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=24 html=yes show_if=always text="Be sure to keep your eyes at <br />the center of the screen throughout the trial.<br /><br /><br />Make your keyboard response while maintaining<br />your fixation at the center of the screen <br />-- do not move your eyes to make a response.<br /><br /><br />Making eye movements will impair your performance.<br /><br /><br />Remember, maintain your fixation at the center of the screen.<br /><br /><br />Press any key to continue" x=0 y=0 z_index=0
+
+define loop onset_ABSENT_EXP
+	set source_file ""
+	set source table
+	set repeat 2
+	set order random
+	set description "Repeatedly runs another item"
+	set cycles 36
+	set continuous no
+	set break_if_on_first yes
+	set break_if never
+	setcycle 0 trial_type 0
+	setcycle 0 target 0
+	setcycle 0 distractor 30
+	setcycle 0 targ_main 1
+	setcycle 0 targ_onset 0
+	setcycle 0 dist_main 0
+	setcycle 0 dist_onset 1
+	setcycle 0 paradigm onset
+	setcycle 1 trial_type 0
+	setcycle 1 target 0
+	setcycle 1 distractor 90
+	setcycle 1 targ_main 1
+	setcycle 1 targ_onset 0
+	setcycle 1 dist_main 0
+	setcycle 1 dist_onset 1
+	setcycle 1 paradigm onset
+	setcycle 2 trial_type 0
+	setcycle 2 target 0
+	setcycle 2 distractor 150
+	setcycle 2 targ_main 1
+	setcycle 2 targ_onset 0
+	setcycle 2 dist_main 0
+	setcycle 2 dist_onset 1
+	setcycle 2 paradigm onset
+	setcycle 3 trial_type 0
+	setcycle 3 target 0
+	setcycle 3 distractor 210
+	setcycle 3 targ_main 1
+	setcycle 3 targ_onset 0
+	setcycle 3 dist_main 0
+	setcycle 3 dist_onset 1
+	setcycle 3 paradigm onset
+	setcycle 4 trial_type 0
+	setcycle 4 target 0
+	setcycle 4 distractor 270
+	setcycle 4 targ_main 1
+	setcycle 4 targ_onset 0
+	setcycle 4 dist_main 0
+	setcycle 4 dist_onset 1
+	setcycle 4 paradigm onset
+	setcycle 5 trial_type 0
+	setcycle 5 target 0
+	setcycle 5 distractor 330
+	setcycle 5 targ_main 1
+	setcycle 5 targ_onset 0
+	setcycle 5 dist_main 0
+	setcycle 5 dist_onset 1
+	setcycle 5 paradigm onset
+	setcycle 6 trial_type 0
+	setcycle 6 target 60
+	setcycle 6 distractor 30
+	setcycle 6 targ_main 1
+	setcycle 6 targ_onset 0
+	setcycle 6 dist_main 0
+	setcycle 6 dist_onset 1
+	setcycle 6 paradigm onset
+	setcycle 7 trial_type 0
+	setcycle 7 target 60
+	setcycle 7 distractor 90
+	setcycle 7 targ_main 1
+	setcycle 7 targ_onset 0
+	setcycle 7 dist_main 0
+	setcycle 7 dist_onset 1
+	setcycle 7 paradigm onset
+	setcycle 8 trial_type 0
+	setcycle 8 target 60
+	setcycle 8 distractor 150
+	setcycle 8 targ_main 1
+	setcycle 8 targ_onset 0
+	setcycle 8 dist_main 0
+	setcycle 8 dist_onset 1
+	setcycle 8 paradigm onset
+	setcycle 9 trial_type 0
+	setcycle 9 target 60
+	setcycle 9 distractor 210
+	setcycle 9 targ_main 1
+	setcycle 9 targ_onset 0
+	setcycle 9 dist_main 0
+	setcycle 9 dist_onset 1
+	setcycle 9 paradigm onset
+	setcycle 10 trial_type 0
+	setcycle 10 target 60
+	setcycle 10 distractor 270
+	setcycle 10 targ_main 1
+	setcycle 10 targ_onset 0
+	setcycle 10 dist_main 0
+	setcycle 10 dist_onset 1
+	setcycle 10 paradigm onset
+	setcycle 11 trial_type 0
+	setcycle 11 target 60
+	setcycle 11 distractor 330
+	setcycle 11 targ_main 1
+	setcycle 11 targ_onset 0
+	setcycle 11 dist_main 0
+	setcycle 11 dist_onset 1
+	setcycle 11 paradigm onset
+	setcycle 12 trial_type 0
+	setcycle 12 target 120
+	setcycle 12 distractor 30
+	setcycle 12 targ_main 1
+	setcycle 12 targ_onset 0
+	setcycle 12 dist_main 0
+	setcycle 12 dist_onset 1
+	setcycle 12 paradigm onset
+	setcycle 13 trial_type 0
+	setcycle 13 target 120
+	setcycle 13 distractor 90
+	setcycle 13 targ_main 1
+	setcycle 13 targ_onset 0
+	setcycle 13 dist_main 0
+	setcycle 13 dist_onset 1
+	setcycle 13 paradigm onset
+	setcycle 14 trial_type 0
+	setcycle 14 target 120
+	setcycle 14 distractor 150
+	setcycle 14 targ_main 1
+	setcycle 14 targ_onset 0
+	setcycle 14 dist_main 0
+	setcycle 14 dist_onset 1
+	setcycle 14 paradigm onset
+	setcycle 15 trial_type 0
+	setcycle 15 target 120
+	setcycle 15 distractor 210
+	setcycle 15 targ_main 1
+	setcycle 15 targ_onset 0
+	setcycle 15 dist_main 0
+	setcycle 15 dist_onset 1
+	setcycle 15 paradigm onset
+	setcycle 16 trial_type 0
+	setcycle 16 target 120
+	setcycle 16 distractor 270
+	setcycle 16 targ_main 1
+	setcycle 16 targ_onset 0
+	setcycle 16 dist_main 0
+	setcycle 16 dist_onset 1
+	setcycle 16 paradigm onset
+	setcycle 17 trial_type 0
+	setcycle 17 target 120
+	setcycle 17 distractor 330
+	setcycle 17 targ_main 1
+	setcycle 17 targ_onset 0
+	setcycle 17 dist_main 0
+	setcycle 17 dist_onset 1
+	setcycle 17 paradigm onset
+	setcycle 18 trial_type 0
+	setcycle 18 target 180
+	setcycle 18 distractor 30
+	setcycle 18 targ_main 1
+	setcycle 18 targ_onset 0
+	setcycle 18 dist_main 0
+	setcycle 18 dist_onset 1
+	setcycle 18 paradigm onset
+	setcycle 19 trial_type 0
+	setcycle 19 target 180
+	setcycle 19 distractor 90
+	setcycle 19 targ_main 1
+	setcycle 19 targ_onset 0
+	setcycle 19 dist_main 0
+	setcycle 19 dist_onset 1
+	setcycle 19 paradigm onset
+	setcycle 20 trial_type 0
+	setcycle 20 target 180
+	setcycle 20 distractor 150
+	setcycle 20 targ_main 1
+	setcycle 20 targ_onset 0
+	setcycle 20 dist_main 0
+	setcycle 20 dist_onset 1
+	setcycle 20 paradigm onset
+	setcycle 21 trial_type 0
+	setcycle 21 target 180
+	setcycle 21 distractor 210
+	setcycle 21 targ_main 1
+	setcycle 21 targ_onset 0
+	setcycle 21 dist_main 0
+	setcycle 21 dist_onset 1
+	setcycle 21 paradigm onset
+	setcycle 22 trial_type 0
+	setcycle 22 target 180
+	setcycle 22 distractor 270
+	setcycle 22 targ_main 1
+	setcycle 22 targ_onset 0
+	setcycle 22 dist_main 0
+	setcycle 22 dist_onset 1
+	setcycle 22 paradigm onset
+	setcycle 23 trial_type 0
+	setcycle 23 target 180
+	setcycle 23 distractor 330
+	setcycle 23 targ_main 1
+	setcycle 23 targ_onset 0
+	setcycle 23 dist_main 0
+	setcycle 23 dist_onset 1
+	setcycle 23 paradigm onset
+	setcycle 24 trial_type 0
+	setcycle 24 target 240
+	setcycle 24 distractor 30
+	setcycle 24 targ_main 1
+	setcycle 24 targ_onset 0
+	setcycle 24 dist_main 0
+	setcycle 24 dist_onset 1
+	setcycle 24 paradigm onset
+	setcycle 25 trial_type 0
+	setcycle 25 target 240
+	setcycle 25 distractor 90
+	setcycle 25 targ_main 1
+	setcycle 25 targ_onset 0
+	setcycle 25 dist_main 0
+	setcycle 25 dist_onset 1
+	setcycle 25 paradigm onset
+	setcycle 26 trial_type 0
+	setcycle 26 target 240
+	setcycle 26 distractor 150
+	setcycle 26 targ_main 1
+	setcycle 26 targ_onset 0
+	setcycle 26 dist_main 0
+	setcycle 26 dist_onset 1
+	setcycle 26 paradigm onset
+	setcycle 27 trial_type 0
+	setcycle 27 target 240
+	setcycle 27 distractor 210
+	setcycle 27 targ_main 1
+	setcycle 27 targ_onset 0
+	setcycle 27 dist_main 0
+	setcycle 27 dist_onset 1
+	setcycle 27 paradigm onset
+	setcycle 28 trial_type 0
+	setcycle 28 target 240
+	setcycle 28 distractor 270
+	setcycle 28 targ_main 1
+	setcycle 28 targ_onset 0
+	setcycle 28 dist_main 0
+	setcycle 28 dist_onset 1
+	setcycle 28 paradigm onset
+	setcycle 29 trial_type 0
+	setcycle 29 target 240
+	setcycle 29 distractor 330
+	setcycle 29 targ_main 1
+	setcycle 29 targ_onset 0
+	setcycle 29 dist_main 0
+	setcycle 29 dist_onset 1
+	setcycle 29 paradigm onset
+	setcycle 30 trial_type 0
+	setcycle 30 target 300
+	setcycle 30 distractor 30
+	setcycle 30 targ_main 1
+	setcycle 30 targ_onset 0
+	setcycle 30 dist_main 0
+	setcycle 30 dist_onset 1
+	setcycle 30 paradigm onset
+	setcycle 31 trial_type 0
+	setcycle 31 target 300
+	setcycle 31 distractor 90
+	setcycle 31 targ_main 1
+	setcycle 31 targ_onset 0
+	setcycle 31 dist_main 0
+	setcycle 31 dist_onset 1
+	setcycle 31 paradigm onset
+	setcycle 32 trial_type 0
+	setcycle 32 target 300
+	setcycle 32 distractor 150
+	setcycle 32 targ_main 1
+	setcycle 32 targ_onset 0
+	setcycle 32 dist_main 0
+	setcycle 32 dist_onset 1
+	setcycle 32 paradigm onset
+	setcycle 33 trial_type 0
+	setcycle 33 target 300
+	setcycle 33 distractor 210
+	setcycle 33 targ_main 1
+	setcycle 33 targ_onset 0
+	setcycle 33 dist_main 0
+	setcycle 33 dist_onset 1
+	setcycle 33 paradigm onset
+	setcycle 34 trial_type 0
+	setcycle 34 target 300
+	setcycle 34 distractor 270
+	setcycle 34 targ_main 1
+	setcycle 34 targ_onset 0
+	setcycle 34 dist_main 0
+	setcycle 34 dist_onset 1
+	setcycle 34 paradigm onset
+	setcycle 35 trial_type 0
+	setcycle 35 target 300
+	setcycle 35 distractor 330
+	setcycle 35 targ_main 1
+	setcycle 35 targ_onset 0
+	setcycle 35 dist_main 0
+	setcycle 35 dist_onset 1
+	setcycle 35 paradigm onset
+	run trial_sequence
+
+define loop onset_ABSENT_PRACTICE
+	set source_file ""
+	set source table
+	set repeat 1
+	set order random
+	set description "Repeatedly runs another item"
+	set cycles 36
+	set continuous no
+	set break_if_on_first yes
+	set break_if never
+	setcycle 0 trial_type 0
+	setcycle 0 target 0
+	setcycle 0 distractor 30
+	setcycle 0 targ_main 1
+	setcycle 0 targ_onset 0
+	setcycle 0 dist_main 0
+	setcycle 0 dist_onset 1
+	setcycle 0 paradigm onset
+	setcycle 1 trial_type 0
+	setcycle 1 target 0
+	setcycle 1 distractor 90
+	setcycle 1 targ_main 1
+	setcycle 1 targ_onset 0
+	setcycle 1 dist_main 0
+	setcycle 1 dist_onset 1
+	setcycle 1 paradigm onset
+	setcycle 2 trial_type 0
+	setcycle 2 target 0
+	setcycle 2 distractor 150
+	setcycle 2 targ_main 1
+	setcycle 2 targ_onset 0
+	setcycle 2 dist_main 0
+	setcycle 2 dist_onset 1
+	setcycle 2 paradigm onset
+	setcycle 3 trial_type 0
+	setcycle 3 target 0
+	setcycle 3 distractor 210
+	setcycle 3 targ_main 1
+	setcycle 3 targ_onset 0
+	setcycle 3 dist_main 0
+	setcycle 3 dist_onset 1
+	setcycle 3 paradigm onset
+	setcycle 4 trial_type 0
+	setcycle 4 target 0
+	setcycle 4 distractor 270
+	setcycle 4 targ_main 1
+	setcycle 4 targ_onset 0
+	setcycle 4 dist_main 0
+	setcycle 4 dist_onset 1
+	setcycle 4 paradigm onset
+	setcycle 5 trial_type 0
+	setcycle 5 target 0
+	setcycle 5 distractor 330
+	setcycle 5 targ_main 1
+	setcycle 5 targ_onset 0
+	setcycle 5 dist_main 0
+	setcycle 5 dist_onset 1
+	setcycle 5 paradigm onset
+	setcycle 6 trial_type 0
+	setcycle 6 target 60
+	setcycle 6 distractor 30
+	setcycle 6 targ_main 1
+	setcycle 6 targ_onset 0
+	setcycle 6 dist_main 0
+	setcycle 6 dist_onset 1
+	setcycle 6 paradigm onset
+	setcycle 7 trial_type 0
+	setcycle 7 target 60
+	setcycle 7 distractor 90
+	setcycle 7 targ_main 1
+	setcycle 7 targ_onset 0
+	setcycle 7 dist_main 0
+	setcycle 7 dist_onset 1
+	setcycle 7 paradigm onset
+	setcycle 8 trial_type 0
+	setcycle 8 target 60
+	setcycle 8 distractor 150
+	setcycle 8 targ_main 1
+	setcycle 8 targ_onset 0
+	setcycle 8 dist_main 0
+	setcycle 8 dist_onset 1
+	setcycle 8 paradigm onset
+	setcycle 9 trial_type 0
+	setcycle 9 target 60
+	setcycle 9 distractor 210
+	setcycle 9 targ_main 1
+	setcycle 9 targ_onset 0
+	setcycle 9 dist_main 0
+	setcycle 9 dist_onset 1
+	setcycle 9 paradigm onset
+	setcycle 10 trial_type 0
+	setcycle 10 target 60
+	setcycle 10 distractor 270
+	setcycle 10 targ_main 1
+	setcycle 10 targ_onset 0
+	setcycle 10 dist_main 0
+	setcycle 10 dist_onset 1
+	setcycle 10 paradigm onset
+	setcycle 11 trial_type 0
+	setcycle 11 target 60
+	setcycle 11 distractor 330
+	setcycle 11 targ_main 1
+	setcycle 11 targ_onset 0
+	setcycle 11 dist_main 0
+	setcycle 11 dist_onset 1
+	setcycle 11 paradigm onset
+	setcycle 12 trial_type 0
+	setcycle 12 target 120
+	setcycle 12 distractor 30
+	setcycle 12 targ_main 1
+	setcycle 12 targ_onset 0
+	setcycle 12 dist_main 0
+	setcycle 12 dist_onset 1
+	setcycle 12 paradigm onset
+	setcycle 13 trial_type 0
+	setcycle 13 target 120
+	setcycle 13 distractor 90
+	setcycle 13 targ_main 1
+	setcycle 13 targ_onset 0
+	setcycle 13 dist_main 0
+	setcycle 13 dist_onset 1
+	setcycle 13 paradigm onset
+	setcycle 14 trial_type 0
+	setcycle 14 target 120
+	setcycle 14 distractor 150
+	setcycle 14 targ_main 1
+	setcycle 14 targ_onset 0
+	setcycle 14 dist_main 0
+	setcycle 14 dist_onset 1
+	setcycle 14 paradigm onset
+	setcycle 15 trial_type 0
+	setcycle 15 target 120
+	setcycle 15 distractor 210
+	setcycle 15 targ_main 1
+	setcycle 15 targ_onset 0
+	setcycle 15 dist_main 0
+	setcycle 15 dist_onset 1
+	setcycle 15 paradigm onset
+	setcycle 16 trial_type 0
+	setcycle 16 target 120
+	setcycle 16 distractor 270
+	setcycle 16 targ_main 1
+	setcycle 16 targ_onset 0
+	setcycle 16 dist_main 0
+	setcycle 16 dist_onset 1
+	setcycle 16 paradigm onset
+	setcycle 17 trial_type 0
+	setcycle 17 target 120
+	setcycle 17 distractor 330
+	setcycle 17 targ_main 1
+	setcycle 17 targ_onset 0
+	setcycle 17 dist_main 0
+	setcycle 17 dist_onset 1
+	setcycle 17 paradigm onset
+	setcycle 18 trial_type 0
+	setcycle 18 target 180
+	setcycle 18 distractor 30
+	setcycle 18 targ_main 1
+	setcycle 18 targ_onset 0
+	setcycle 18 dist_main 0
+	setcycle 18 dist_onset 1
+	setcycle 18 paradigm onset
+	setcycle 19 trial_type 0
+	setcycle 19 target 180
+	setcycle 19 distractor 90
+	setcycle 19 targ_main 1
+	setcycle 19 targ_onset 0
+	setcycle 19 dist_main 0
+	setcycle 19 dist_onset 1
+	setcycle 19 paradigm onset
+	setcycle 20 trial_type 0
+	setcycle 20 target 180
+	setcycle 20 distractor 150
+	setcycle 20 targ_main 1
+	setcycle 20 targ_onset 0
+	setcycle 20 dist_main 0
+	setcycle 20 dist_onset 1
+	setcycle 20 paradigm onset
+	setcycle 21 trial_type 0
+	setcycle 21 target 180
+	setcycle 21 distractor 210
+	setcycle 21 targ_main 1
+	setcycle 21 targ_onset 0
+	setcycle 21 dist_main 0
+	setcycle 21 dist_onset 1
+	setcycle 21 paradigm onset
+	setcycle 22 trial_type 0
+	setcycle 22 target 180
+	setcycle 22 distractor 270
+	setcycle 22 targ_main 1
+	setcycle 22 targ_onset 0
+	setcycle 22 dist_main 0
+	setcycle 22 dist_onset 1
+	setcycle 22 paradigm onset
+	setcycle 23 trial_type 0
+	setcycle 23 target 180
+	setcycle 23 distractor 330
+	setcycle 23 targ_main 1
+	setcycle 23 targ_onset 0
+	setcycle 23 dist_main 0
+	setcycle 23 dist_onset 1
+	setcycle 23 paradigm onset
+	setcycle 24 trial_type 0
+	setcycle 24 target 240
+	setcycle 24 distractor 30
+	setcycle 24 targ_main 1
+	setcycle 24 targ_onset 0
+	setcycle 24 dist_main 0
+	setcycle 24 dist_onset 1
+	setcycle 24 paradigm onset
+	setcycle 25 trial_type 0
+	setcycle 25 target 240
+	setcycle 25 distractor 90
+	setcycle 25 targ_main 1
+	setcycle 25 targ_onset 0
+	setcycle 25 dist_main 0
+	setcycle 25 dist_onset 1
+	setcycle 25 paradigm onset
+	setcycle 26 trial_type 0
+	setcycle 26 target 240
+	setcycle 26 distractor 150
+	setcycle 26 targ_main 1
+	setcycle 26 targ_onset 0
+	setcycle 26 dist_main 0
+	setcycle 26 dist_onset 1
+	setcycle 26 paradigm onset
+	setcycle 27 trial_type 0
+	setcycle 27 target 240
+	setcycle 27 distractor 210
+	setcycle 27 targ_main 1
+	setcycle 27 targ_onset 0
+	setcycle 27 dist_main 0
+	setcycle 27 dist_onset 1
+	setcycle 27 paradigm onset
+	setcycle 28 trial_type 0
+	setcycle 28 target 240
+	setcycle 28 distractor 270
+	setcycle 28 targ_main 1
+	setcycle 28 targ_onset 0
+	setcycle 28 dist_main 0
+	setcycle 28 dist_onset 1
+	setcycle 28 paradigm onset
+	setcycle 29 trial_type 0
+	setcycle 29 target 240
+	setcycle 29 distractor 330
+	setcycle 29 targ_main 1
+	setcycle 29 targ_onset 0
+	setcycle 29 dist_main 0
+	setcycle 29 dist_onset 1
+	setcycle 29 paradigm onset
+	setcycle 30 trial_type 0
+	setcycle 30 target 300
+	setcycle 30 distractor 30
+	setcycle 30 targ_main 1
+	setcycle 30 targ_onset 0
+	setcycle 30 dist_main 0
+	setcycle 30 dist_onset 1
+	setcycle 30 paradigm onset
+	setcycle 31 trial_type 0
+	setcycle 31 target 300
+	setcycle 31 distractor 90
+	setcycle 31 targ_main 1
+	setcycle 31 targ_onset 0
+	setcycle 31 dist_main 0
+	setcycle 31 dist_onset 1
+	setcycle 31 paradigm onset
+	setcycle 32 trial_type 0
+	setcycle 32 target 300
+	setcycle 32 distractor 150
+	setcycle 32 targ_main 1
+	setcycle 32 targ_onset 0
+	setcycle 32 dist_main 0
+	setcycle 32 dist_onset 1
+	setcycle 32 paradigm onset
+	setcycle 33 trial_type 0
+	setcycle 33 target 300
+	setcycle 33 distractor 210
+	setcycle 33 targ_main 1
+	setcycle 33 targ_onset 0
+	setcycle 33 dist_main 0
+	setcycle 33 dist_onset 1
+	setcycle 33 paradigm onset
+	setcycle 34 trial_type 0
+	setcycle 34 target 300
+	setcycle 34 distractor 270
+	setcycle 34 targ_main 1
+	setcycle 34 targ_onset 0
+	setcycle 34 dist_main 0
+	setcycle 34 dist_onset 1
+	setcycle 34 paradigm onset
+	setcycle 35 trial_type 0
+	setcycle 35 target 300
+	setcycle 35 distractor 330
+	setcycle 35 targ_main 1
+	setcycle 35 targ_onset 0
+	setcycle 35 dist_main 0
+	setcycle 35 dist_onset 1
+	setcycle 35 paradigm onset
+	run trial_sequence
+
+define loop onset_PRESENT_EXP
+	set source_file ""
+	set source table
+	set repeat 2
+	set order random
+	set description "Repeatedly runs another item"
+	set cycles 36
+	set continuous no
+	set break_if_on_first yes
+	set break_if never
+	setcycle 0 trial_type 1
+	setcycle 0 target 0
+	setcycle 0 distractor 30
+	setcycle 0 targ_main 1
+	setcycle 0 targ_onset 0
+	setcycle 0 dist_main 0
+	setcycle 0 dist_onset 1
+	setcycle 0 paradigm onset
+	setcycle 1 trial_type 1
+	setcycle 1 target 0
+	setcycle 1 distractor 90
+	setcycle 1 targ_main 1
+	setcycle 1 targ_onset 0
+	setcycle 1 dist_main 0
+	setcycle 1 dist_onset 1
+	setcycle 1 paradigm onset
+	setcycle 2 trial_type 1
+	setcycle 2 target 0
+	setcycle 2 distractor 150
+	setcycle 2 targ_main 1
+	setcycle 2 targ_onset 0
+	setcycle 2 dist_main 0
+	setcycle 2 dist_onset 1
+	setcycle 2 paradigm onset
+	setcycle 3 trial_type 1
+	setcycle 3 target 0
+	setcycle 3 distractor 210
+	setcycle 3 targ_main 1
+	setcycle 3 targ_onset 0
+	setcycle 3 dist_main 0
+	setcycle 3 dist_onset 1
+	setcycle 3 paradigm onset
+	setcycle 4 trial_type 1
+	setcycle 4 target 0
+	setcycle 4 distractor 270
+	setcycle 4 targ_main 1
+	setcycle 4 targ_onset 0
+	setcycle 4 dist_main 0
+	setcycle 4 dist_onset 1
+	setcycle 4 paradigm onset
+	setcycle 5 trial_type 1
+	setcycle 5 target 0
+	setcycle 5 distractor 330
+	setcycle 5 targ_main 1
+	setcycle 5 targ_onset 0
+	setcycle 5 dist_main 0
+	setcycle 5 dist_onset 1
+	setcycle 5 paradigm onset
+	setcycle 6 trial_type 1
+	setcycle 6 target 60
+	setcycle 6 distractor 30
+	setcycle 6 targ_main 1
+	setcycle 6 targ_onset 0
+	setcycle 6 dist_main 0
+	setcycle 6 dist_onset 1
+	setcycle 6 paradigm onset
+	setcycle 7 trial_type 1
+	setcycle 7 target 60
+	setcycle 7 distractor 90
+	setcycle 7 targ_main 1
+	setcycle 7 targ_onset 0
+	setcycle 7 dist_main 0
+	setcycle 7 dist_onset 1
+	setcycle 7 paradigm onset
+	setcycle 8 trial_type 1
+	setcycle 8 target 60
+	setcycle 8 distractor 150
+	setcycle 8 targ_main 1
+	setcycle 8 targ_onset 0
+	setcycle 8 dist_main 0
+	setcycle 8 dist_onset 1
+	setcycle 8 paradigm onset
+	setcycle 9 trial_type 1
+	setcycle 9 target 60
+	setcycle 9 distractor 210
+	setcycle 9 targ_main 1
+	setcycle 9 targ_onset 0
+	setcycle 9 dist_main 0
+	setcycle 9 dist_onset 1
+	setcycle 9 paradigm onset
+	setcycle 10 trial_type 1
+	setcycle 10 target 60
+	setcycle 10 distractor 270
+	setcycle 10 targ_main 1
+	setcycle 10 targ_onset 0
+	setcycle 10 dist_main 0
+	setcycle 10 dist_onset 1
+	setcycle 10 paradigm onset
+	setcycle 11 trial_type 1
+	setcycle 11 target 60
+	setcycle 11 distractor 330
+	setcycle 11 targ_main 1
+	setcycle 11 targ_onset 0
+	setcycle 11 dist_main 0
+	setcycle 11 dist_onset 1
+	setcycle 11 paradigm onset
+	setcycle 12 trial_type 1
+	setcycle 12 target 120
+	setcycle 12 distractor 30
+	setcycle 12 targ_main 1
+	setcycle 12 targ_onset 0
+	setcycle 12 dist_main 0
+	setcycle 12 dist_onset 1
+	setcycle 12 paradigm onset
+	setcycle 13 trial_type 1
+	setcycle 13 target 120
+	setcycle 13 distractor 90
+	setcycle 13 targ_main 1
+	setcycle 13 targ_onset 0
+	setcycle 13 dist_main 0
+	setcycle 13 dist_onset 1
+	setcycle 13 paradigm onset
+	setcycle 14 trial_type 1
+	setcycle 14 target 120
+	setcycle 14 distractor 150
+	setcycle 14 targ_main 1
+	setcycle 14 targ_onset 0
+	setcycle 14 dist_main 0
+	setcycle 14 dist_onset 1
+	setcycle 14 paradigm onset
+	setcycle 15 trial_type 1
+	setcycle 15 target 120
+	setcycle 15 distractor 210
+	setcycle 15 targ_main 1
+	setcycle 15 targ_onset 0
+	setcycle 15 dist_main 0
+	setcycle 15 dist_onset 1
+	setcycle 15 paradigm onset
+	setcycle 16 trial_type 1
+	setcycle 16 target 120
+	setcycle 16 distractor 270
+	setcycle 16 targ_main 1
+	setcycle 16 targ_onset 0
+	setcycle 16 dist_main 0
+	setcycle 16 dist_onset 1
+	setcycle 16 paradigm onset
+	setcycle 17 trial_type 1
+	setcycle 17 target 120
+	setcycle 17 distractor 330
+	setcycle 17 targ_main 1
+	setcycle 17 targ_onset 0
+	setcycle 17 dist_main 0
+	setcycle 17 dist_onset 1
+	setcycle 17 paradigm onset
+	setcycle 18 trial_type 1
+	setcycle 18 target 180
+	setcycle 18 distractor 30
+	setcycle 18 targ_main 1
+	setcycle 18 targ_onset 0
+	setcycle 18 dist_main 0
+	setcycle 18 dist_onset 1
+	setcycle 18 paradigm onset
+	setcycle 19 trial_type 1
+	setcycle 19 target 180
+	setcycle 19 distractor 90
+	setcycle 19 targ_main 1
+	setcycle 19 targ_onset 0
+	setcycle 19 dist_main 0
+	setcycle 19 dist_onset 1
+	setcycle 19 paradigm onset
+	setcycle 20 trial_type 1
+	setcycle 20 target 180
+	setcycle 20 distractor 150
+	setcycle 20 targ_main 1
+	setcycle 20 targ_onset 0
+	setcycle 20 dist_main 0
+	setcycle 20 dist_onset 1
+	setcycle 20 paradigm onset
+	setcycle 21 trial_type 1
+	setcycle 21 target 180
+	setcycle 21 distractor 210
+	setcycle 21 targ_main 1
+	setcycle 21 targ_onset 0
+	setcycle 21 dist_main 0
+	setcycle 21 dist_onset 1
+	setcycle 21 paradigm onset
+	setcycle 22 trial_type 1
+	setcycle 22 target 180
+	setcycle 22 distractor 270
+	setcycle 22 targ_main 1
+	setcycle 22 targ_onset 0
+	setcycle 22 dist_main 0
+	setcycle 22 dist_onset 1
+	setcycle 22 paradigm onset
+	setcycle 23 trial_type 1
+	setcycle 23 target 180
+	setcycle 23 distractor 330
+	setcycle 23 targ_main 1
+	setcycle 23 targ_onset 0
+	setcycle 23 dist_main 0
+	setcycle 23 dist_onset 1
+	setcycle 23 paradigm onset
+	setcycle 24 trial_type 1
+	setcycle 24 target 240
+	setcycle 24 distractor 30
+	setcycle 24 targ_main 1
+	setcycle 24 targ_onset 0
+	setcycle 24 dist_main 0
+	setcycle 24 dist_onset 1
+	setcycle 24 paradigm onset
+	setcycle 25 trial_type 1
+	setcycle 25 target 240
+	setcycle 25 distractor 90
+	setcycle 25 targ_main 1
+	setcycle 25 targ_onset 0
+	setcycle 25 dist_main 0
+	setcycle 25 dist_onset 1
+	setcycle 25 paradigm onset
+	setcycle 26 trial_type 1
+	setcycle 26 target 240
+	setcycle 26 distractor 150
+	setcycle 26 targ_main 1
+	setcycle 26 targ_onset 0
+	setcycle 26 dist_main 0
+	setcycle 26 dist_onset 1
+	setcycle 26 paradigm onset
+	setcycle 27 trial_type 1
+	setcycle 27 target 240
+	setcycle 27 distractor 210
+	setcycle 27 targ_main 1
+	setcycle 27 targ_onset 0
+	setcycle 27 dist_main 0
+	setcycle 27 dist_onset 1
+	setcycle 27 paradigm onset
+	setcycle 28 trial_type 1
+	setcycle 28 target 240
+	setcycle 28 distractor 270
+	setcycle 28 targ_main 1
+	setcycle 28 targ_onset 0
+	setcycle 28 dist_main 0
+	setcycle 28 dist_onset 1
+	setcycle 28 paradigm onset
+	setcycle 29 trial_type 1
+	setcycle 29 target 240
+	setcycle 29 distractor 330
+	setcycle 29 targ_main 1
+	setcycle 29 targ_onset 0
+	setcycle 29 dist_main 0
+	setcycle 29 dist_onset 1
+	setcycle 29 paradigm onset
+	setcycle 30 trial_type 1
+	setcycle 30 target 300
+	setcycle 30 distractor 30
+	setcycle 30 targ_main 1
+	setcycle 30 targ_onset 0
+	setcycle 30 dist_main 0
+	setcycle 30 dist_onset 1
+	setcycle 30 paradigm onset
+	setcycle 31 trial_type 1
+	setcycle 31 target 300
+	setcycle 31 distractor 90
+	setcycle 31 targ_main 1
+	setcycle 31 targ_onset 0
+	setcycle 31 dist_main 0
+	setcycle 31 dist_onset 1
+	setcycle 31 paradigm onset
+	setcycle 32 trial_type 1
+	setcycle 32 target 300
+	setcycle 32 distractor 150
+	setcycle 32 targ_main 1
+	setcycle 32 targ_onset 0
+	setcycle 32 dist_main 0
+	setcycle 32 dist_onset 1
+	setcycle 32 paradigm onset
+	setcycle 33 trial_type 1
+	setcycle 33 target 300
+	setcycle 33 distractor 210
+	setcycle 33 targ_main 1
+	setcycle 33 targ_onset 0
+	setcycle 33 dist_main 0
+	setcycle 33 dist_onset 1
+	setcycle 33 paradigm onset
+	setcycle 34 trial_type 1
+	setcycle 34 target 300
+	setcycle 34 distractor 270
+	setcycle 34 targ_main 1
+	setcycle 34 targ_onset 0
+	setcycle 34 dist_main 0
+	setcycle 34 dist_onset 1
+	setcycle 34 paradigm onset
+	setcycle 35 trial_type 1
+	setcycle 35 target 300
+	setcycle 35 distractor 330
+	setcycle 35 targ_main 1
+	setcycle 35 targ_onset 0
+	setcycle 35 dist_main 0
+	setcycle 35 dist_onset 1
+	setcycle 35 paradigm onset
+	run trial_sequence
+
+define loop onset_PRESENT_PRACTICE
+	set source_file ""
+	set source table
+	set repeat 1
+	set order random
+	set description "Repeatedly runs another item"
+	set cycles 36
+	set continuous no
+	set break_if_on_first yes
+	set break_if never
+	setcycle 0 trial_type 1
+	setcycle 0 target 0
+	setcycle 0 distractor 30
+	setcycle 0 targ_main 1
+	setcycle 0 targ_onset 0
+	setcycle 0 dist_main 0
+	setcycle 0 dist_onset 1
+	setcycle 0 paradigm onset
+	setcycle 1 trial_type 1
+	setcycle 1 target 0
+	setcycle 1 distractor 90
+	setcycle 1 targ_main 1
+	setcycle 1 targ_onset 0
+	setcycle 1 dist_main 0
+	setcycle 1 dist_onset 1
+	setcycle 1 paradigm onset
+	setcycle 2 trial_type 1
+	setcycle 2 target 0
+	setcycle 2 distractor 150
+	setcycle 2 targ_main 1
+	setcycle 2 targ_onset 0
+	setcycle 2 dist_main 0
+	setcycle 2 dist_onset 1
+	setcycle 2 paradigm onset
+	setcycle 3 trial_type 1
+	setcycle 3 target 0
+	setcycle 3 distractor 210
+	setcycle 3 targ_main 1
+	setcycle 3 targ_onset 0
+	setcycle 3 dist_main 0
+	setcycle 3 dist_onset 1
+	setcycle 3 paradigm onset
+	setcycle 4 trial_type 1
+	setcycle 4 target 0
+	setcycle 4 distractor 270
+	setcycle 4 targ_main 1
+	setcycle 4 targ_onset 0
+	setcycle 4 dist_main 0
+	setcycle 4 dist_onset 1
+	setcycle 4 paradigm onset
+	setcycle 5 trial_type 1
+	setcycle 5 target 0
+	setcycle 5 distractor 330
+	setcycle 5 targ_main 1
+	setcycle 5 targ_onset 0
+	setcycle 5 dist_main 0
+	setcycle 5 dist_onset 1
+	setcycle 5 paradigm onset
+	setcycle 6 trial_type 1
+	setcycle 6 target 60
+	setcycle 6 distractor 30
+	setcycle 6 targ_main 1
+	setcycle 6 targ_onset 0
+	setcycle 6 dist_main 0
+	setcycle 6 dist_onset 1
+	setcycle 6 paradigm onset
+	setcycle 7 trial_type 1
+	setcycle 7 target 60
+	setcycle 7 distractor 90
+	setcycle 7 targ_main 1
+	setcycle 7 targ_onset 0
+	setcycle 7 dist_main 0
+	setcycle 7 dist_onset 1
+	setcycle 7 paradigm onset
+	setcycle 8 trial_type 1
+	setcycle 8 target 60
+	setcycle 8 distractor 150
+	setcycle 8 targ_main 1
+	setcycle 8 targ_onset 0
+	setcycle 8 dist_main 0
+	setcycle 8 dist_onset 1
+	setcycle 8 paradigm onset
+	setcycle 9 trial_type 1
+	setcycle 9 target 60
+	setcycle 9 distractor 210
+	setcycle 9 targ_main 1
+	setcycle 9 targ_onset 0
+	setcycle 9 dist_main 0
+	setcycle 9 dist_onset 1
+	setcycle 9 paradigm onset
+	setcycle 10 trial_type 1
+	setcycle 10 target 60
+	setcycle 10 distractor 270
+	setcycle 10 targ_main 1
+	setcycle 10 targ_onset 0
+	setcycle 10 dist_main 0
+	setcycle 10 dist_onset 1
+	setcycle 10 paradigm onset
+	setcycle 11 trial_type 1
+	setcycle 11 target 60
+	setcycle 11 distractor 330
+	setcycle 11 targ_main 1
+	setcycle 11 targ_onset 0
+	setcycle 11 dist_main 0
+	setcycle 11 dist_onset 1
+	setcycle 11 paradigm onset
+	setcycle 12 trial_type 1
+	setcycle 12 target 120
+	setcycle 12 distractor 30
+	setcycle 12 targ_main 1
+	setcycle 12 targ_onset 0
+	setcycle 12 dist_main 0
+	setcycle 12 dist_onset 1
+	setcycle 12 paradigm onset
+	setcycle 13 trial_type 1
+	setcycle 13 target 120
+	setcycle 13 distractor 90
+	setcycle 13 targ_main 1
+	setcycle 13 targ_onset 0
+	setcycle 13 dist_main 0
+	setcycle 13 dist_onset 1
+	setcycle 13 paradigm onset
+	setcycle 14 trial_type 1
+	setcycle 14 target 120
+	setcycle 14 distractor 150
+	setcycle 14 targ_main 1
+	setcycle 14 targ_onset 0
+	setcycle 14 dist_main 0
+	setcycle 14 dist_onset 1
+	setcycle 14 paradigm onset
+	setcycle 15 trial_type 1
+	setcycle 15 target 120
+	setcycle 15 distractor 210
+	setcycle 15 targ_main 1
+	setcycle 15 targ_onset 0
+	setcycle 15 dist_main 0
+	setcycle 15 dist_onset 1
+	setcycle 15 paradigm onset
+	setcycle 16 trial_type 1
+	setcycle 16 target 120
+	setcycle 16 distractor 270
+	setcycle 16 targ_main 1
+	setcycle 16 targ_onset 0
+	setcycle 16 dist_main 0
+	setcycle 16 dist_onset 1
+	setcycle 16 paradigm onset
+	setcycle 17 trial_type 1
+	setcycle 17 target 120
+	setcycle 17 distractor 330
+	setcycle 17 targ_main 1
+	setcycle 17 targ_onset 0
+	setcycle 17 dist_main 0
+	setcycle 17 dist_onset 1
+	setcycle 17 paradigm onset
+	setcycle 18 trial_type 1
+	setcycle 18 target 180
+	setcycle 18 distractor 30
+	setcycle 18 targ_main 1
+	setcycle 18 targ_onset 0
+	setcycle 18 dist_main 0
+	setcycle 18 dist_onset 1
+	setcycle 18 paradigm onset
+	setcycle 19 trial_type 1
+	setcycle 19 target 180
+	setcycle 19 distractor 90
+	setcycle 19 targ_main 1
+	setcycle 19 targ_onset 0
+	setcycle 19 dist_main 0
+	setcycle 19 dist_onset 1
+	setcycle 19 paradigm onset
+	setcycle 20 trial_type 1
+	setcycle 20 target 180
+	setcycle 20 distractor 150
+	setcycle 20 targ_main 1
+	setcycle 20 targ_onset 0
+	setcycle 20 dist_main 0
+	setcycle 20 dist_onset 1
+	setcycle 20 paradigm onset
+	setcycle 21 trial_type 1
+	setcycle 21 target 180
+	setcycle 21 distractor 210
+	setcycle 21 targ_main 1
+	setcycle 21 targ_onset 0
+	setcycle 21 dist_main 0
+	setcycle 21 dist_onset 1
+	setcycle 21 paradigm onset
+	setcycle 22 trial_type 1
+	setcycle 22 target 180
+	setcycle 22 distractor 270
+	setcycle 22 targ_main 1
+	setcycle 22 targ_onset 0
+	setcycle 22 dist_main 0
+	setcycle 22 dist_onset 1
+	setcycle 22 paradigm onset
+	setcycle 23 trial_type 1
+	setcycle 23 target 180
+	setcycle 23 distractor 330
+	setcycle 23 targ_main 1
+	setcycle 23 targ_onset 0
+	setcycle 23 dist_main 0
+	setcycle 23 dist_onset 1
+	setcycle 23 paradigm onset
+	setcycle 24 trial_type 1
+	setcycle 24 target 240
+	setcycle 24 distractor 30
+	setcycle 24 targ_main 1
+	setcycle 24 targ_onset 0
+	setcycle 24 dist_main 0
+	setcycle 24 dist_onset 1
+	setcycle 24 paradigm onset
+	setcycle 25 trial_type 1
+	setcycle 25 target 240
+	setcycle 25 distractor 90
+	setcycle 25 targ_main 1
+	setcycle 25 targ_onset 0
+	setcycle 25 dist_main 0
+	setcycle 25 dist_onset 1
+	setcycle 25 paradigm onset
+	setcycle 26 trial_type 1
+	setcycle 26 target 240
+	setcycle 26 distractor 150
+	setcycle 26 targ_main 1
+	setcycle 26 targ_onset 0
+	setcycle 26 dist_main 0
+	setcycle 26 dist_onset 1
+	setcycle 26 paradigm onset
+	setcycle 27 trial_type 1
+	setcycle 27 target 240
+	setcycle 27 distractor 210
+	setcycle 27 targ_main 1
+	setcycle 27 targ_onset 0
+	setcycle 27 dist_main 0
+	setcycle 27 dist_onset 1
+	setcycle 27 paradigm onset
+	setcycle 28 trial_type 1
+	setcycle 28 target 240
+	setcycle 28 distractor 270
+	setcycle 28 targ_main 1
+	setcycle 28 targ_onset 0
+	setcycle 28 dist_main 0
+	setcycle 28 dist_onset 1
+	setcycle 28 paradigm onset
+	setcycle 29 trial_type 1
+	setcycle 29 target 240
+	setcycle 29 distractor 330
+	setcycle 29 targ_main 1
+	setcycle 29 targ_onset 0
+	setcycle 29 dist_main 0
+	setcycle 29 dist_onset 1
+	setcycle 29 paradigm onset
+	setcycle 30 trial_type 1
+	setcycle 30 target 300
+	setcycle 30 distractor 30
+	setcycle 30 targ_main 1
+	setcycle 30 targ_onset 0
+	setcycle 30 dist_main 0
+	setcycle 30 dist_onset 1
+	setcycle 30 paradigm onset
+	setcycle 31 trial_type 1
+	setcycle 31 target 300
+	setcycle 31 distractor 90
+	setcycle 31 targ_main 1
+	setcycle 31 targ_onset 0
+	setcycle 31 dist_main 0
+	setcycle 31 dist_onset 1
+	setcycle 31 paradigm onset
+	setcycle 32 trial_type 1
+	setcycle 32 target 300
+	setcycle 32 distractor 150
+	setcycle 32 targ_main 1
+	setcycle 32 targ_onset 0
+	setcycle 32 dist_main 0
+	setcycle 32 dist_onset 1
+	setcycle 32 paradigm onset
+	setcycle 33 trial_type 1
+	setcycle 33 target 300
+	setcycle 33 distractor 210
+	setcycle 33 targ_main 1
+	setcycle 33 targ_onset 0
+	setcycle 33 dist_main 0
+	setcycle 33 dist_onset 1
+	setcycle 33 paradigm onset
+	setcycle 34 trial_type 1
+	setcycle 34 target 300
+	setcycle 34 distractor 270
+	setcycle 34 targ_main 1
+	setcycle 34 targ_onset 0
+	setcycle 34 dist_main 0
+	setcycle 34 dist_onset 1
+	setcycle 34 paradigm onset
+	setcycle 35 trial_type 1
+	setcycle 35 target 300
+	setcycle 35 distractor 330
+	setcycle 35 targ_main 1
+	setcycle 35 targ_onset 0
+	setcycle 35 dist_main 0
+	setcycle 35 dist_onset 1
+	setcycle 35 paradigm onset
+	run trial_sequence
+
+define sketchpad onset_absent
+	set duration keypress
+	set description "Displays stimuli"
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=18 html=yes show_if=always text="For this block, the IRRELEVANT ITEM IS ABSENT" x=0 y=-160 z_index=0
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=18 html=yes show_if=always text="Press any key to continue" x=0 y=160 z_index=0
+
+define sketchpad onset_present
+	set duration keypress
+	set description "Displays stimuli"
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=18 html=yes show_if=always text="For this block, the IRRELEVANT ITEM IS PRESENT" x=0 y=-160 z_index=0
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=18 html=yes show_if=always text="Press any key to continue" x=0 y=160 z_index=0
+
+define sketchpad practice_next
+	set duration keypress
+	set description "Displays stimuli"
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=24 html=yes show_if=always text="Practice trials are next.<br /><br />Press any key to continue" x=0 y=0 z_index=0
+
+define sketchpad remember_fixate
+	set duration keypress
+	set description "Displays stimuli"
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=24 html=yes show_if=always text="Remember, maintain your fixation <br />at the center of the screen, <br />and make a response without moving your eyes.<br /><br /><br /><br /><br />Press any key to continue" x=0 y=0 z_index=0
+
+define logger save_data
+	set description "Logs experimental data"
+	set auto_log yes
+
+define inline_script search_display
+	set description "Executes Python code"
+	set _run ""
+	___prepare__
+	import gc
+	import math
+	import random
+	# ======================================================
+	
+	# create canvas to draw stimuli
+	cnvs = canvas()
+	
+	# list of orientations
+	main_list = [0,60,120,180,240,300]
+	onset_list = [30,90,150,210,270,330]
+	target_line_orientations = list()
+	target_line_orientations.extend([0,90])
+	distractor_line_orientations = list()
+	distractor_line_orientations = [30,60,120,150,210,240,300,330]
+	all_possible_orientations = target_line_orientations + distractor_line_orientations
+	possible_keys = ["z","/"]
+	
+	# ======================================================
+	
+	# get trial params
+	paradigm = exp.get("paradigm")
+	eccentricity = exp.get("eccentricity")
+	line_length = exp.get("line_height")
+	line_thickness = exp.get("line_thickness")
+	trial_timeout = exp.get("response_timeout")
+	
+	# target params
+	target_loc = exp.get("target")
+	target_onset = exp.get("targ_onset")
+	circle_line_thickness = exp.get("circle_thickness")
+	target_color = var.target_color
+	
+	# distractor params
+	distractor_loc = exp.get("distractor")
+	distractor_onset = exp.get("dist_onset")
+	sq_length = exp.get("square_length")
+	radius = sq_length
+	
+	# determine distractor color by if its a distractor trial or not
+	if(var.trial_type == 0 and paradigm == "ASP"):
+		distractor_color = var.distractor_colors[1] # green
+	elif(var.trial_type == 0 and paradigm == "onset"):
+		distractor_color = var.distractor_colors[0] # green
+	else:
+		distractor_color = var.distractor_colors[0] # red
+	
+	# ======================================================
+	
+	# create trial angle orientations list for all stim
+	stim_list = list()
+	stim_list.extend(main_list)
+	
+	if(target_onset):
+		stim_list.append(target_loc)
+	elif(distractor_onset):
+		stim_list.append(distractor_loc)
+	else:
+		stim_list.append(random.choice(onset_list))
+	
+	# set set size variable in the data
+	var.set_size = len(stim_list)
+	
+	# ======================================================
+	
+	# ======================================================
+	# draw fixation cross
+	cnvs.text(text="+", x=0, y=0, font_size=var.fix_cross_px)
+	cnvs.show()
+	self.sleep(var.fix_cross_ms)
+	
+	# ======================================================
+	# draw fixation dot and premask if onset trial
+	cnvs.clear()
+	cnvs.fixdot(color='white')
+	
+	# if ASP, no premask
+	if paradigm != "ASP":
+		# stim list subtract onset locs if trial_type = 1 from main list (set math)
+		if(var.trial_type == 1):
+			premask_stim_list = main_list
+		else:
+			premask_stim_list = stim_list
+		for angle in premask_stim_list:
+			x = eccentricity * math.cos(math.radians(angle))
+			y = eccentricity * math.sin(math.radians(angle))
+			
+			cnvs.circle(x, y, radius/2, penwidth = circle_line_thickness,fill=False, color=target_color)
+			
+			for ori in all_possible_orientations:
+				dx, dy = xy_from_polar(line_length/2, ori)
+				cnvs.line(x+dx, y+dy, x-dx, y-dy, penwidth = var.premask_line_thickness)
+			
+	cnvs.show()
+	self.sleep(var.fix_dot_ms)
+	
+	# ======================================================
+	# draw search display
+	cnvs.clear()
+	
+	for angle in stim_list:
+		x = eccentricity * math.cos(math.radians(angle))
+		y = eccentricity * math.sin(math.radians(angle))
+	
+		# if asp, if target draw circle
+		if(angle == target_loc):
+			target_line_orientation = random.choice(target_line_orientations)
+	
+			if(target_line_orientation == 0):
+				var.correct_response = "z"
+			elif(target_line_orientation == 90):
+				var.correct_response = "/"
+	
+			dx, dy = xy_from_polar(line_length/2, target_line_orientation)
+	
+			# target is green circle across all tasks
+			cnvs.circle(x, y, radius/2, penwidth = circle_line_thickness,fill=False, color=target_color)
+			cnvs.line(x+dx, y+dy, x-dx, y-dy, penwidth = line_thickness)
+		elif(angle == distractor_loc):
+			distractor_line_orientation = random.choice(distractor_line_orientations)
+			dx, dy = xy_from_polar(line_length/2, distractor_line_orientation)
+	
+			if(paradigm == "ASP"):
+				cnvs.rect(x-sq_length/2,y-sq_length/2, sq_length, sq_length, penwidth = circle_line_thickness,fill=False, color=distractor_color)
+			elif(paradigm == "onset"):
+				cnvs.circle(x, y, radius/2, penwidth = circle_line_thickness,fill=False, color=distractor_color)
+			cnvs.line(x+dx, y+dy, x-dx, y-dy, penwidth = line_thickness)
+	
+		else:
+			distractor_line_orientation = random.choice(distractor_line_orientations)
+			dx, dy = xy_from_polar(line_length/2, distractor_line_orientation)
+			
+			if(paradigm == "ASP"):
+				cnvs.rect(x-sq_length/2,y-sq_length/2, sq_length, sq_length, penwidth = circle_line_thickness,fill=False, color=target_color)
+			elif(paradigm == "onset"):
+				cnvs.circle(x, y, radius/2, penwidth = circle_line_thickness,fill=False, color=distractor_color)
+			cnvs.line(x+dx, y+dy, x-dx, y-dy, penwidth = line_thickness)
+	
+	# ======================================================
+	# show stimuli (flip the screen)
+	my_keyboard = keyboard()
+	my_keyboard.flush()
+	cnvs.fixdot(color='white')
+	cnvs.show()
+	
+	# ======================================================
+	# wait for key response (get key and RT)
+	my_keyboard = keyboard(keylist=possible_keys, timeout=trial_timeout)
+	start_time = clock.time()
+	key, end_time = my_keyboard.get_key()
+	if key is None:
+		var.response = "timeout"
+	else:
+		var.response = key.lower()
+	var.response_time = end_time - start_time
+	
+	# ======================================================
+	# code accuracy and timeout information
+	if key is None:
+		var.correct = 0
+		var.timeout = 1
+	else:
+		if(var.response == var.correct_response):
+			var.correct = 1
+			var.timeout = 0
+		else:
+			var.correct = 0
+			var.timeout = 0
+	
+	# ======================================================
+	# draw feedback fixation
+	cnvs.clear()
+	if(var.correct == 1):
+		cnvs.fixdot(color='green')
+	elif(var.timeout == 1):
+		cnvs.fixdot(color='orange')
+	else:
+		cnvs.fixdot(color='red')
+	cnvs.show()
+	self.sleep(var.fix_dot_ms/2)
+	
+	gc.collect()
+	__end__
+
+define sequence trial_sequence
+	set flush_keyboard yes
+	set description "Runs a number of items in sequence"
+	run search_display always
+	run save_data always
+
