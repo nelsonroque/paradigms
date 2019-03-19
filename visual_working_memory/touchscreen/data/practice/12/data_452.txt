@@ -1,0 +1,1 @@
+datetime	block	trial	trial_type	setSize	RT	accuracy	timeout	clickedObject	Targ_X	Targ_Y	Click_X	Click_Y	target_start_color	target_end_color

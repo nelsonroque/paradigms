@@ -1,0 +1,4 @@
+timestamp,version,trial,cue_type,line_sweep_direction,cue_pos_x,cue_pos_y,top_line_x,top_line_y,bottom_line_x,bottom_line_y,RT,n_rotations,n_updates,cue_angle1,cue_angle2,line_angle,line_angle_wrap360
+2018-11-19 19:35:14,SWEEP,0,flash,+,-200,0,-100.0,-100.0,100.0,100.0,1.7034108638763428,1.7,102,180.0,270.0,612.0,252.0
+2018-11-19 19:35:19,SWEEP,1,flash,+,-200,0,-100.0,-100.0,100.0,100.0,0.7187204360961914,0.7333333333333333,44,180.0,270.0,264.0,264.0
+2018-11-19 19:35:22,SWEEP,2,flash,+,0,-200,-100.0,-100.0,100.0,100.0,1.3734309673309326,1.3833333333333333,83,270.0,180.0,498.0,138.0

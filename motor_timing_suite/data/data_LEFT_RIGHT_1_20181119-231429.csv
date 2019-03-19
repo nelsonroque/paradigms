@@ -1,0 +1,4 @@
+timestamp,version,trial,RT,ACC,cue,case_shown,user_response
+2018-11-19 23:14:30,LEFT_RIGHT,0,0.794498205185,1,left,left,left
+2018-11-19 23:14:32,LEFT_RIGHT,1,0.921619176865,1,left-arrow,NA,left
+2018-11-19 23:14:34,LEFT_RIGHT,2,0.578588008881,1,right,right,right

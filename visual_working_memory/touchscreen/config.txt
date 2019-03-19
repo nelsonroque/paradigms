@@ -1,0 +1,22 @@
+debug:0|int
+square_colors:black,white,blue,yellow,red,green,magenta|strlist
+isWidescreen:1|int
+isRetina:0|int
+screen_width:2160|int
+screen_height:1440|int
+square_size:41|int
+buffer_controller:1.2789999|float
+window_buffer_controller:39.6|float
+screen_bgColor:gray|str
+fontColor:white|str
+heading_font_height_adj:10|int
+instruct_font_height_adj:24|int
+fixation_duration:.8|float
+stimulus_duration:.25|float
+blank_duration:.2|float
+intertrial_interval:.9|float
+timeout_duration:2.2|float
+numPracticeTrialsCondition:10|int
+numExpTrialsCondition:36|int
+prac_instruct_list:In this experiment you will be presented with colored squares briefly, they'll disappear, then the colored squares will be presented again, but one of the squares may or may not have changed color.***Your goal is to respond as accurately as possible whether a square changed color, but please make your response within 2 seconds.***If a square changed color press the Left touch screen button corresponding with Change. If there was no color change press the Right touch screen button corresponding with No Change.***You will have your left thumb over the left touch screen button (left-touch) and your right thumb over the right touch screen button (right-touch).***Practice trials are next,Do you have any questions?***Remember that accuracy is what matters not speed but do not use any more time than necessary to produce each response.|strlist2
+exp_instruct_list:In this experiment you will be presented with colored squares briefly, they'll disappear, then the colored squares will be presented again, but one of the squares may or may not have changed color.***Your goal is to respond as accurately as possible whether a square changed color, but please make your response within 2 seconds.***If a square changed color press the Left touch screen button corresponding with Change. If there was no color change press the Right touch screen button corresponding with No Change.***You will have your left thumb over the left touch screen button (left-touch) and your right thumb over the right touch screen button (right-touch).***Remember that accuracy is what matters not speed but do not use any more time than necessary to produce each response.|strlist2

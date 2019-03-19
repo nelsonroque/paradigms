@@ -1,0 +1,4 @@
+timestamp,version,trial,RT,ACC,CUE,case_shown
+2018-11-19 23:11:15,LEFT_RIGHT,0,0.544131040573,0,left,LEFT,right
+2018-11-19 23:11:17,LEFT_RIGHT,1,1.10545301437,0,left-arrow,NA,right
+2018-11-19 23:11:19,LEFT_RIGHT,2,1.09756779671,1,right-arrow,NA,right

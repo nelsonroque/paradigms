@@ -1,0 +1,2 @@
+timestamp,version,trial,retention_time_secs,cue_type,line_sweep_direction,cue_pos_x,cue_pos_y,top_line_x,top_line_y,bottom_line_x,bottom_line_y,RT,n_rotations,n_updates,cue_angle1,cue_angle2,line_angle,line_angle_wrap360
+2018-11-19 20:20:09,SWEEP,0,1.2,flash,+,200,-200,-100.0,-100.0,100.0,100.0,6.127027988433838,5.315555555555587,368,315.0,135.0,1913.6000000000115,113.6000000000115

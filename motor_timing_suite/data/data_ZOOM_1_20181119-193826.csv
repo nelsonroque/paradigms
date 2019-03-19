@@ -1,0 +1,1 @@
+timestamp,version,trial,retention_time_secs,update_count,reset_count,sweeper_growth_speed,sweeper_start_scaling_factor,sweeper_end_scaling_factor,sweeper_start_radius,sweeper_end_radius,cue_radius,radial_difference,RT
