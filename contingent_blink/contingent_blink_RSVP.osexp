@@ -189,13 +189,18 @@ define loop trial_table
 	set repeat 1
 	set order random
 	set description "Repeatedly runs another item"
-	set cycles 4
+	set cycles 12
 	set continuous no
 	set break_if_on_first yes
 	set break_if never
-	setcycle 0 trial_type lie
-	setcycle 0 trial_cue L
+	setcycle 0 distractor_color green
+	setcycle 0 distractor_identity "#"
+	setcycle 0 distractor_location_x 100
+	setcycle 0 distractor_location_y 100
+	setcycle 0 distractor_position_relative_to_target -3
+	setcycle 0 distractor_present Y
 	setcycle 0 letter1 A
+	setcycle 0 letter10 J
 	setcycle 0 letter2 B
 	setcycle 0 letter3 C
 	setcycle 0 letter4 D
@@ -204,18 +209,18 @@ define loop trial_table
 	setcycle 0 letter7 G
 	setcycle 0 letter8 H
 	setcycle 0 letter9 I
-	setcycle 0 letter10 J
 	setcycle 0 target_letter K
 	setcycle 0 target_position 10
-	setcycle 0 distractor_position_relative_to_target -3
-	setcycle 0 distractor_location_x 100
-	setcycle 0 distractor_location_y 100
-	setcycle 0 distractor_present Y
-	setcycle 0 distractor_color green
-	setcycle 0 distractor_identity "#"
-	setcycle 1 trial_type lie
-	setcycle 1 trial_cue T
+	setcycle 0 trial_cue L
+	setcycle 0 trial_type distractor
+	setcycle 1 distractor_color green
+	setcycle 1 distractor_identity "#"
+	setcycle 1 distractor_location_x 100
+	setcycle 1 distractor_location_y 100
+	setcycle 1 distractor_position_relative_to_target -2
+	setcycle 1 distractor_present Y
 	setcycle 1 letter1 A
+	setcycle 1 letter10 J
 	setcycle 1 letter2 B
 	setcycle 1 letter3 C
 	setcycle 1 letter4 D
@@ -224,18 +229,18 @@ define loop trial_table
 	setcycle 1 letter7 G
 	setcycle 1 letter8 H
 	setcycle 1 letter9 I
-	setcycle 1 letter10 J
-	setcycle 1 target_letter K
+	setcycle 1 target_letter R
 	setcycle 1 target_position 10
-	setcycle 1 distractor_position_relative_to_target -2
-	setcycle 1 distractor_location_x 100
-	setcycle 1 distractor_location_y 100
-	setcycle 1 distractor_present Y
-	setcycle 1 distractor_color green
-	setcycle 1 distractor_identity "#"
-	setcycle 2 trial_type lie
-	setcycle 2 trial_cue L
+	setcycle 1 trial_cue T
+	setcycle 1 trial_type distractor
+	setcycle 2 distractor_color green
+	setcycle 2 distractor_identity "#"
+	setcycle 2 distractor_location_x 100
+	setcycle 2 distractor_location_y 100
+	setcycle 2 distractor_position_relative_to_target -1
+	setcycle 2 distractor_present Y
 	setcycle 2 letter1 A
+	setcycle 2 letter10 J
 	setcycle 2 letter2 B
 	setcycle 2 letter3 C
 	setcycle 2 letter4 D
@@ -244,18 +249,18 @@ define loop trial_table
 	setcycle 2 letter7 G
 	setcycle 2 letter8 H
 	setcycle 2 letter9 I
-	setcycle 2 letter10 J
-	setcycle 2 target_letter K
+	setcycle 2 target_letter W
 	setcycle 2 target_position 10
-	setcycle 2 distractor_position_relative_to_target -1
-	setcycle 2 distractor_location_x 100
-	setcycle 2 distractor_location_y 100
-	setcycle 2 distractor_present Y
-	setcycle 2 distractor_color green
-	setcycle 2 distractor_identity "#"
-	setcycle 3 trial_type lie
-	setcycle 3 trial_cue T
+	setcycle 2 trial_cue L
+	setcycle 2 trial_type distractor
+	setcycle 3 distractor_color green
+	setcycle 3 distractor_identity "#"
+	setcycle 3 distractor_location_x 100
+	setcycle 3 distractor_location_y 100
+	setcycle 3 distractor_position_relative_to_target 0
+	setcycle 3 distractor_present Y
 	setcycle 3 letter1 A
+	setcycle 3 letter10 J
 	setcycle 3 letter2 B
 	setcycle 3 letter3 C
 	setcycle 3 letter4 D
@@ -264,14 +269,169 @@ define loop trial_table
 	setcycle 3 letter7 G
 	setcycle 3 letter8 H
 	setcycle 3 letter9 I
-	setcycle 3 letter10 J
-	setcycle 3 target_letter K
+	setcycle 3 target_letter N
 	setcycle 3 target_position 10
-	setcycle 3 distractor_position_relative_to_target 0
-	setcycle 3 distractor_location_x 100
-	setcycle 3 distractor_location_y 100
-	setcycle 3 distractor_present Y
-	setcycle 3 distractor_color green
-	setcycle 3 distractor_identity "#"
+	setcycle 3 trial_cue T
+	setcycle 3 trial_type distractor
+	setcycle 4 distractor_color red
+	setcycle 4 distractor_identity "#"
+	setcycle 4 distractor_location_x 100
+	setcycle 4 distractor_location_y 100
+	setcycle 4 distractor_position_relative_to_target -3
+	setcycle 4 distractor_present Y
+	setcycle 4 letter1 A
+	setcycle 4 letter10 J
+	setcycle 4 letter2 B
+	setcycle 4 letter3 C
+	setcycle 4 letter4 D
+	setcycle 4 letter5 E
+	setcycle 4 letter6 F
+	setcycle 4 letter7 G
+	setcycle 4 letter8 H
+	setcycle 4 letter9 I
+	setcycle 4 target_letter O
+	setcycle 4 target_position 10
+	setcycle 4 trial_cue L
+	setcycle 4 trial_type distractor
+	setcycle 5 distractor_color red
+	setcycle 5 distractor_identity "#"
+	setcycle 5 distractor_location_x 100
+	setcycle 5 distractor_location_y 100
+	setcycle 5 distractor_position_relative_to_target -2
+	setcycle 5 distractor_present Y
+	setcycle 5 letter1 A
+	setcycle 5 letter10 J
+	setcycle 5 letter2 B
+	setcycle 5 letter3 C
+	setcycle 5 letter4 D
+	setcycle 5 letter5 E
+	setcycle 5 letter6 F
+	setcycle 5 letter7 G
+	setcycle 5 letter8 H
+	setcycle 5 letter9 I
+	setcycle 5 target_letter X
+	setcycle 5 target_position 10
+	setcycle 5 trial_cue T
+	setcycle 5 trial_type distractor
+	setcycle 6 distractor_color red
+	setcycle 6 distractor_identity "#"
+	setcycle 6 distractor_location_x 100
+	setcycle 6 distractor_location_y 100
+	setcycle 6 distractor_position_relative_to_target -1
+	setcycle 6 distractor_present Y
+	setcycle 6 letter1 A
+	setcycle 6 letter10 J
+	setcycle 6 letter2 B
+	setcycle 6 letter3 C
+	setcycle 6 letter4 D
+	setcycle 6 letter5 E
+	setcycle 6 letter6 F
+	setcycle 6 letter7 G
+	setcycle 6 letter8 H
+	setcycle 6 letter9 I
+	setcycle 6 target_letter Y
+	setcycle 6 target_position 10
+	setcycle 6 trial_cue L
+	setcycle 6 trial_type distractor
+	setcycle 7 distractor_color red
+	setcycle 7 distractor_identity "#"
+	setcycle 7 distractor_location_x 100
+	setcycle 7 distractor_location_y 100
+	setcycle 7 distractor_position_relative_to_target 0
+	setcycle 7 distractor_present Y
+	setcycle 7 letter1 A
+	setcycle 7 letter10 J
+	setcycle 7 letter2 B
+	setcycle 7 letter3 C
+	setcycle 7 letter4 D
+	setcycle 7 letter5 E
+	setcycle 7 letter6 F
+	setcycle 7 letter7 G
+	setcycle 7 letter8 H
+	setcycle 7 letter9 I
+	setcycle 7 target_letter S
+	setcycle 7 target_position 10
+	setcycle 7 trial_cue T
+	setcycle 7 trial_type distractor
+	setcycle 8 distractor_color grey
+	setcycle 8 distractor_identity "#"
+	setcycle 8 distractor_location_x 100
+	setcycle 8 distractor_location_y 100
+	setcycle 8 distractor_position_relative_to_target -3
+	setcycle 8 distractor_present Y
+	setcycle 8 letter1 A
+	setcycle 8 letter10 J
+	setcycle 8 letter2 B
+	setcycle 8 letter3 C
+	setcycle 8 letter4 D
+	setcycle 8 letter5 E
+	setcycle 8 letter6 F
+	setcycle 8 letter7 G
+	setcycle 8 letter8 H
+	setcycle 8 letter9 I
+	setcycle 8 target_letter O
+	setcycle 8 target_position 10
+	setcycle 8 trial_cue L
+	setcycle 8 trial_type distractor
+	setcycle 9 distractor_color grey
+	setcycle 9 distractor_identity "#"
+	setcycle 9 distractor_location_x 100
+	setcycle 9 distractor_location_y 100
+	setcycle 9 distractor_position_relative_to_target -2
+	setcycle 9 distractor_present Y
+	setcycle 9 letter1 A
+	setcycle 9 letter10 J
+	setcycle 9 letter2 B
+	setcycle 9 letter3 C
+	setcycle 9 letter4 D
+	setcycle 9 letter5 E
+	setcycle 9 letter6 F
+	setcycle 9 letter7 G
+	setcycle 9 letter8 H
+	setcycle 9 letter9 I
+	setcycle 9 target_letter X
+	setcycle 9 target_position 10
+	setcycle 9 trial_cue T
+	setcycle 9 trial_type distractor
+	setcycle 10 distractor_color grey
+	setcycle 10 distractor_identity "#"
+	setcycle 10 distractor_location_x 100
+	setcycle 10 distractor_location_y 100
+	setcycle 10 distractor_position_relative_to_target -1
+	setcycle 10 distractor_present Y
+	setcycle 10 letter1 A
+	setcycle 10 letter10 J
+	setcycle 10 letter2 B
+	setcycle 10 letter3 C
+	setcycle 10 letter4 D
+	setcycle 10 letter5 E
+	setcycle 10 letter6 F
+	setcycle 10 letter7 G
+	setcycle 10 letter8 H
+	setcycle 10 letter9 I
+	setcycle 10 target_letter Y
+	setcycle 10 target_position 10
+	setcycle 10 trial_cue L
+	setcycle 10 trial_type distractor
+	setcycle 11 distractor_color grey
+	setcycle 11 distractor_identity "#"
+	setcycle 11 distractor_location_x 100
+	setcycle 11 distractor_location_y 100
+	setcycle 11 distractor_position_relative_to_target 0
+	setcycle 11 distractor_present Y
+	setcycle 11 letter1 A
+	setcycle 11 letter10 J
+	setcycle 11 letter2 B
+	setcycle 11 letter3 C
+	setcycle 11 letter4 D
+	setcycle 11 letter5 E
+	setcycle 11 letter6 F
+	setcycle 11 letter7 G
+	setcycle 11 letter8 H
+	setcycle 11 letter9 I
+	setcycle 11 target_letter S
+	setcycle 11 target_position 10
+	setcycle 11 trial_cue T
+	setcycle 11 trial_type distractor
 	run trial_sequence
 
