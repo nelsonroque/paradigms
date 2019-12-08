@@ -1,0 +1,1987 @@
+---
+API: 2
+OpenSesame: 3.0.5
+Platform: nt
+---
+set width 1024
+set uniform_coordinates "no"
+set transparent_variables "no"
+set title "Theeuwes (1992) & (2004)"
+set synth_backend "legacy"
+set subject_parity "even"
+set subject_nr 0
+set start "experiment"
+set sampler_backend "legacy"
+set mouse_backend "psycho"
+set keyboard_backend "psycho"
+set height 768
+set foreground "white"
+set font_size 18
+set font_italic "no"
+set font_family "mono"
+set font_bold "no"
+set description "Close replication of a combination of methods of Theeuwes 1992 and 2004"
+set coordinates "relative"
+set compensation 0
+set color_backend "psycho"
+set clock_backend "psycho"
+set canvas_backend "psycho"
+set bidi "no"
+set background "black"
+
+define loop block_loop_distractorAbsent_even
+	set skip 0
+	set repeat 8
+	set order "random"
+	set offset "no"
+	set item "trial_sequence_1_1"
+	set description "A block of trials"
+	set cycles 3
+	set column_order "display_size;distractor"
+	set break_if "never"
+	setcycle 0 display_size "5"
+	setcycle 0 distractor "absent"
+	setcycle 1 display_size "7"
+	setcycle 1 distractor "absent"
+	setcycle 2 display_size "9"
+	setcycle 2 distractor "absent"
+	run trial_sequence_1_1
+
+define loop block_loop_distractorAbsent_even_1
+	set skip 0
+	set repeat 32
+	set order "random"
+	set offset "no"
+	set item "trial_sequence_1_1_1"
+	set description "A block of trials"
+	set cycles 3
+	set column_order "display_size;distractor"
+	set break_if "never"
+	setcycle 0 display_size "5"
+	setcycle 0 distractor "absent"
+	setcycle 1 display_size "7"
+	setcycle 1 distractor "absent"
+	setcycle 2 display_size "9"
+	setcycle 2 distractor "absent"
+	run trial_sequence_1_1_1
+
+define loop block_loop_distractorAbsent_odd
+	set skip 0
+	set repeat 8
+	set order "random"
+	set offset "no"
+	set item "trial_sequence_1"
+	set description "A block of trials"
+	set cycles 3
+	set column_order "display_size;distractor"
+	set break_if "never"
+	setcycle 0 display_size "5"
+	setcycle 0 distractor "absent"
+	setcycle 1 display_size "7"
+	setcycle 1 distractor "absent"
+	setcycle 2 display_size "9"
+	setcycle 2 distractor "absent"
+	run trial_sequence_1
+
+define loop block_loop_distractorAbsent_odd_1
+	set skip 0
+	set repeat 32
+	set order "random"
+	set offset "no"
+	set item "trial_sequence_1_2"
+	set description "A block of trials"
+	set cycles 3
+	set column_order "display_size;distractor"
+	set break_if "never"
+	setcycle 0 display_size "5"
+	setcycle 0 distractor "absent"
+	setcycle 1 display_size "7"
+	setcycle 1 distractor "absent"
+	setcycle 2 display_size "9"
+	setcycle 2 distractor "absent"
+	run trial_sequence_1_2
+
+define loop block_loop_distractorPresent_even
+	set skip 0
+	set repeat 8
+	set order "random"
+	set offset "no"
+	set item "trial_sequence_2"
+	set description "A block of trials"
+	set cycles 3
+	set column_order "display_size;distractor"
+	set break_if "never"
+	setcycle 0 display_size "5"
+	setcycle 0 distractor "present"
+	setcycle 1 display_size "7"
+	setcycle 1 distractor "present"
+	setcycle 2 display_size "9"
+	setcycle 2 distractor "present"
+	run trial_sequence_2
+
+define loop block_loop_distractorPresent_even_1
+	set skip 0
+	set repeat 32
+	set order "random"
+	set offset "no"
+	set item "trial_sequence_2_1"
+	set description "A block of trials"
+	set cycles 3
+	set column_order "display_size;distractor"
+	set break_if "never"
+	setcycle 0 display_size "5"
+	setcycle 0 distractor "present"
+	setcycle 1 display_size "7"
+	setcycle 1 distractor "present"
+	setcycle 2 display_size "9"
+	setcycle 2 distractor "present"
+	run trial_sequence_2_1
+
+define loop block_loop_distractorPresent_odd
+	set skip 0
+	set repeat 8
+	set order "random"
+	set offset "no"
+	set item "trial_sequence"
+	set description "A block of trials"
+	set cycles 3
+	set column_order "display_size;distractor"
+	set break_if "never"
+	setcycle 0 display_size "5"
+	setcycle 0 distractor "present"
+	setcycle 1 display_size "7"
+	setcycle 1 distractor "present"
+	setcycle 2 display_size "9"
+	setcycle 2 distractor "present"
+	run trial_sequence
+
+define loop block_loop_distractorPresent_odd_1
+	set skip 0
+	set repeat 32
+	set order "random"
+	set offset "no"
+	set item "trial_sequence_3"
+	set description "A block of trials"
+	set cycles 3
+	set column_order "display_size;distractor"
+	set break_if "never"
+	setcycle 0 display_size "5"
+	setcycle 0 distractor "present"
+	setcycle 1 display_size "7"
+	setcycle 1 distractor "present"
+	setcycle 2 display_size "9"
+	setcycle 2 distractor "present"
+	run trial_sequence_3
+
+define sequence block_sequence
+	set flush_keyboard "yes"
+	set description "An instruction screen, followed by a block of trials and feedback"
+	run reset_feedback always
+	run block_loop_distractorAbsent_odd "[subject_parity] = \"odd\""
+	run block_loop_distractorPresent_odd "[subject_parity] = \"odd\""
+	run block_loop_distractorPresent_even "[subject_parity] = \"even\""
+	run block_loop_distractorAbsent_even "[subject_parity] = \"even\""
+	run feedback always
+
+define sequence block_sequence_1
+	set flush_keyboard "yes"
+	set description "An instruction screen, followed by a block of trials and feedback"
+	run reset_feedback_1 always
+	run block_loop_distractorAbsent_odd_1 "[subject_parity] = \"odd\""
+	run block_loop_distractorPresent_odd_1 "[subject_parity] = \"odd\""
+	run block_loop_distractorPresent_even_1 "[subject_parity] = \"even\""
+	run block_loop_distractorAbsent_even_1 "[subject_parity] = \"even\""
+	run feedback_1 always
+
+define sketchpad cross
+	set start_response_interval "no"
+	set duration 600
+	set description "A fixation cross"
+	draw line color=white penwidth=2 show_if=always x1=0 x2=0 y1=-8 y2=8 z_index=0
+	draw line color=white penwidth=2 show_if=always x1=-8 x2=8 y1=0 y2=0 z_index=0
+
+define sketchpad cross_1
+	set start_response_interval "no"
+	set duration 600
+	set description "A fixation cross"
+	draw line color=white penwidth=2 show_if=always x1=0 x2=0 y1=-8 y2=8 z_index=0
+	draw line color=white penwidth=2 show_if=always x1=-8 x2=8 y1=0 y2=0 z_index=0
+
+define sketchpad cross_1_1
+	set start_response_interval "no"
+	set duration 600
+	set description "A fixation cross"
+	draw line color=white penwidth=2 show_if=always x1=0 x2=0 y1=-8 y2=8 z_index=0
+	draw line color=white penwidth=2 show_if=always x1=-8 x2=8 y1=0 y2=0 z_index=0
+
+define sketchpad cross_1_1_1
+	set start_response_interval "no"
+	set duration 600
+	set description "A fixation cross"
+	draw line color=white penwidth=2 show_if=always x1=0 x2=0 y1=-8 y2=8 z_index=0
+	draw line color=white penwidth=2 show_if=always x1=-8 x2=8 y1=0 y2=0 z_index=0
+
+define sketchpad cross_1_2
+	set start_response_interval "no"
+	set duration 600
+	set description "A fixation cross"
+	draw line color=white penwidth=2 show_if=always x1=0 x2=0 y1=-8 y2=8 z_index=0
+	draw line color=white penwidth=2 show_if=always x1=-8 x2=8 y1=0 y2=0 z_index=0
+
+define sketchpad cross_2
+	set start_response_interval "no"
+	set duration 600
+	set description "A fixation cross"
+	draw line color=white penwidth=2 show_if=always x1=0 x2=0 y1=-8 y2=8 z_index=0
+	draw line color=white penwidth=2 show_if=always x1=-8 x2=8 y1=0 y2=0 z_index=0
+
+define sketchpad cross_2_1
+	set start_response_interval "no"
+	set duration 600
+	set description "A fixation cross"
+	draw line color=white penwidth=2 show_if=always x1=0 x2=0 y1=-8 y2=8 z_index=0
+	draw line color=white penwidth=2 show_if=always x1=-8 x2=8 y1=0 y2=0 z_index=0
+
+define sketchpad cross_3
+	set start_response_interval "no"
+	set duration 600
+	set description "A fixation cross"
+	draw line color=white penwidth=2 show_if=always x1=0 x2=0 y1=-8 y2=8 z_index=0
+	draw line color=white penwidth=2 show_if=always x1=-8 x2=8 y1=0 y2=0 z_index=0
+
+define sketchpad end_of_practice
+	set start_response_interval "no"
+	set duration "keypress"
+	set description "Tell the participant that the practice phase is finished"
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=18 html=yes show_if=always text="The practice phase is finished" x=0 y=-64 z_index=0
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=18 html=yes show_if=always text="Press any key to start the real experiment ..." x=0 y=64 z_index=0
+
+define sequence experiment
+	set flush_keyboard "yes"
+	set description "The main experimental sequence"
+	run keyboard_instructions1 always
+	run performance_instructions always
+	run start_practice always
+	run practice_loop always
+	run end_of_practice always
+	run experiment_loop always
+	run performance_instructions always
+	run keyboard_instructions2 always
+	run goodbye always
+
+define loop experiment_loop
+	set skip 0
+	set repeat 2
+	set order "random"
+	set offset "no"
+	set item "block_sequence_1"
+	set description "Run a single practice block"
+	set cycles 1
+	set column_order "practice;condition"
+	set break_if "never"
+	setcycle 0 practice "no"
+	setcycle 0 condition "form"
+	run block_sequence_1
+
+define loop experimental_loop
+	set skip 0
+	set repeat 1
+	set order "random"
+	set offset "no"
+	set item "block_sequence"
+	set description "Run a number of experimental blocks"
+	set cycles 1
+	set column_order "practice;condition"
+	set break_if "never"
+	setcycle 0 practice "no"
+	setcycle 0 condition "form"
+	run block_sequence
+
+define feedback feedback
+	set reset_variables "yes"
+	set duration "keypress"
+	set description "Provides feedback to the participant"
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=18 html=yes show_if=always text="Your average response time was [avg_rt]ms" x=0 y=-128 z_index=0
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=18 html=yes show_if=always text="Your accuracy was [acc]%" x=0 y=-64 z_index=0
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=18 html=yes show_if=always text="Press any key to continue ..." x=0 y=64 z_index=0
+
+define feedback feedback_1
+	set reset_variables "yes"
+	set duration "keypress"
+	set description "Provides feedback to the participant"
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=18 html=yes show_if=always text="Your average response time was [avg_rt]ms" x=0 y=-128 z_index=0
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=18 html=yes show_if=always text="Your accuracy was [acc]%" x=0 y=-64 z_index=0
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=18 html=yes show_if=always text="Press any key to continue ..." x=0 y=64 z_index=0
+
+define sketchpad fixdot
+	set start_response_interval "no"
+	set duration 600
+	set description "A fixation dot"
+	draw fixdot color=white show_if=always style=default x=0 y=0 z_index=0
+
+define sketchpad fixdot_1
+	set start_response_interval "no"
+	set duration 600
+	set description "A fixation dot"
+	draw fixdot color=white show_if=always style=default x=0 y=0 z_index=0
+
+define sketchpad fixdot_1_1
+	set start_response_interval "no"
+	set duration 600
+	set description "A fixation dot"
+	draw fixdot color=white show_if=always style=default x=0 y=0 z_index=0
+
+define sketchpad fixdot_1_1_1
+	set start_response_interval "no"
+	set duration 600
+	set description "A fixation dot"
+	draw fixdot color=white show_if=always style=default x=0 y=0 z_index=0
+
+define sketchpad fixdot_1_2
+	set start_response_interval "no"
+	set duration 600
+	set description "A fixation dot"
+	draw fixdot color=white show_if=always style=default x=0 y=0 z_index=0
+
+define sketchpad fixdot_2
+	set start_response_interval "no"
+	set duration 600
+	set description "A fixation dot"
+	draw fixdot color=white show_if=always style=default x=0 y=0 z_index=0
+
+define sketchpad fixdot_2_1
+	set start_response_interval "no"
+	set duration 600
+	set description "A fixation dot"
+	draw fixdot color=white show_if=always style=default x=0 y=0 z_index=0
+
+define sketchpad fixdot_3
+	set start_response_interval "no"
+	set duration 600
+	set description "A fixation dot"
+	draw fixdot color=white show_if=always style=default x=0 y=0 z_index=0
+
+define sketchpad goodbye
+	set start_response_interval "no"
+	set duration "keypress"
+	set description "Say goodbye!"
+	draw textline center=1 color=white font_bold=yes font_family=mono font_italic=no font_size=34 html=yes show_if=always text="This task is finished!" x=0.0 y=-128.0 z_index=0
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=18 html=yes show_if=always text="EXPERIMENTER PLEASE PRESS THE 'S' KEY" x=0.0 y=128.0 z_index=0
+	draw textline center=1 color=white font_bold=yes font_family=mono font_italic=no font_size=24 html=yes show_if=always text="Please open the door to notify <br />your experimenter that you <br />have completed the experiment" x=0.0 y=0.0 z_index=0
+
+define sketchpad green_fixdot
+	set start_response_interval "no"
+	set duration 500
+	set description "Displays stimuli"
+	draw line color=green penwidth=1 show_if=always x1=0 x2=0 y1=0 y2=0 z_index=0
+	draw fixdot color=green show_if=always style=default x=0 y=0 z_index=0
+
+define sketchpad green_fixdot_1
+	set start_response_interval "no"
+	set duration 500
+	set description "Displays stimuli"
+	draw line color=green penwidth=1 show_if=always x1=0 x2=0 y1=0 y2=0 z_index=0
+	draw fixdot color=green show_if=always style=default x=0 y=0 z_index=0
+
+define sketchpad green_fixdot_1_1
+	set start_response_interval "no"
+	set duration 500
+	set description "Displays stimuli"
+	draw line color=green penwidth=1 show_if=always x1=0 x2=0 y1=0 y2=0 z_index=0
+	draw fixdot color=green show_if=always style=default x=0 y=0 z_index=0
+
+define sketchpad green_fixdot_1_1_1
+	set start_response_interval "no"
+	set duration 500
+	set description "Displays stimuli"
+	draw line color=green penwidth=1 show_if=always x1=0 x2=0 y1=0 y2=0 z_index=0
+	draw fixdot color=green show_if=always style=default x=0 y=0 z_index=0
+
+define sketchpad green_fixdot_1_2
+	set start_response_interval "no"
+	set duration 500
+	set description "Displays stimuli"
+	draw line color=green penwidth=1 show_if=always x1=0 x2=0 y1=0 y2=0 z_index=0
+	draw fixdot color=green show_if=always style=default x=0 y=0 z_index=0
+
+define sketchpad green_fixdot_2
+	set start_response_interval "no"
+	set duration 500
+	set description "Displays stimuli"
+	draw line color=green penwidth=1 show_if=always x1=0 x2=0 y1=0 y2=0 z_index=0
+	draw fixdot color=green show_if=always style=default x=0 y=0 z_index=0
+
+define sketchpad green_fixdot_2_1
+	set start_response_interval "no"
+	set duration 500
+	set description "Displays stimuli"
+	draw line color=green penwidth=1 show_if=always x1=0 x2=0 y1=0 y2=0 z_index=0
+	draw fixdot color=green show_if=always style=default x=0 y=0 z_index=0
+
+define sketchpad green_fixdot_3
+	set start_response_interval "no"
+	set duration 500
+	set description "Displays stimuli"
+	draw line color=green penwidth=1 show_if=always x1=0 x2=0 y1=0 y2=0 z_index=0
+	draw fixdot color=green show_if=always style=default x=0 y=0 z_index=0
+
+define sketchpad keyboard_instructions1
+	set start_response_interval "no"
+	set duration "keypress"
+	set description "Present instruction for the form condition"
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=24 html=yes show_if=always text="Your goal in this task is to report <br />the orientation of the line in the green circle" x=0.0 y=-160.0 z_index=0
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=18 html=yes show_if=always text="" x=0 y=0 z_index=0
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=18 html=yes show_if=always text="Press any key to continue ..." x=0.0 y=224.0 z_index=0
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=18 html=yes show_if=always text="Horizontal = 'z'-key" x=-288 y=96 z_index=0
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=18 html=yes show_if=always text="Vertical = '/'-key" x=288 y=96 z_index=0
+	draw circle color=green fill=0 penwidth=3 r=40 show_if=always x=-288 y=0 z_index=0
+	draw circle color=green fill=0 penwidth=3 r=40 show_if=always x=288 y=0 z_index=0
+	draw line color=white penwidth=2 show_if=always x1=-310.0 x2=-266.0 y1=0.0 y2=0.0 z_index=0
+	draw line color=white penwidth=2 show_if=always x1=288 x2=288 y1=-22 y2=22 z_index=0
+
+define sketchpad keyboard_instructions2
+	set start_response_interval "no"
+	set duration "keypress"
+	set description "Present instruction for the form condition"
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=24 html=yes show_if=always text="Remember, your goal in this task is to report <br />the orientation of the line in the green circle" x=0 y=-160 z_index=0
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=18 html=yes show_if=always text="" x=0 y=0 z_index=0
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=18 html=yes show_if=always text="Press any key to continue ..." x=0 y=224 z_index=0
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=18 html=yes show_if=always text="Horizontal = 'z'-key" x=-288 y=96 z_index=0
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=18 html=yes show_if=always text="Vertical = '/'-key" x=288 y=96 z_index=0
+	draw circle color=green fill=0 penwidth=3 r=40 show_if=always x=-288 y=0 z_index=0
+	draw circle color=green fill=0 penwidth=3 r=40 show_if=always x=288 y=0 z_index=0
+	draw line color=white penwidth=2 show_if=always x1=-310 x2=-266 y1=0 y2=0 z_index=0
+	draw line color=white penwidth=2 show_if=always x1=288 x2=288 y1=-22 y2=22 z_index=0
+
+define keyboard_response keyboard_response
+	set timeout 2000
+	set flush "yes"
+	set duration "keypress"
+	set description "Collects keyboard responses"
+	set allowed_responses "z;slash"
+
+define keyboard_response keyboard_response_1
+	set timeout 2000
+	set flush "yes"
+	set duration "keypress"
+	set description "Collects keyboard responses"
+	set allowed_responses "z;slash"
+
+define keyboard_response keyboard_response_1_1
+	set timeout 2000
+	set flush "yes"
+	set duration "keypress"
+	set description "Collects keyboard responses"
+	set allowed_responses "z;slash"
+
+define keyboard_response keyboard_response_1_1_1
+	set timeout 2000
+	set flush "yes"
+	set duration "keypress"
+	set description "Collects keyboard responses"
+	set allowed_responses "z;slash"
+
+define keyboard_response keyboard_response_1_2
+	set timeout 2000
+	set flush "yes"
+	set duration "keypress"
+	set description "Collects keyboard responses"
+	set allowed_responses "z;slash"
+
+define keyboard_response keyboard_response_2
+	set timeout 2000
+	set flush "yes"
+	set duration "keypress"
+	set description "Collects keyboard responses"
+	set allowed_responses "z;slash"
+
+define keyboard_response keyboard_response_2_1
+	set timeout 2000
+	set flush "yes"
+	set duration "keypress"
+	set description "Collects keyboard responses"
+	set allowed_responses "z;slash"
+
+define keyboard_response keyboard_response_3
+	set timeout 2000
+	set flush "yes"
+	set duration "keypress"
+	set description "Collects keyboard responses"
+	set allowed_responses "z;slash"
+
+define logger logger
+	set description "Logs experimental data"
+	set auto_log "yes"
+	log display_size
+	log distractor
+	log practice
+	log condition
+	log response
+	log correct
+	log response_time
+
+define logger logger_1
+	set description "Logs experimental data"
+	set auto_log "yes"
+	log display_size
+	log distractor
+	log practice
+	log condition
+	log response
+	log correct
+	log response_time
+
+define logger logger_1_1
+	set description "Logs experimental data"
+	set auto_log "yes"
+	log display_size
+	log distractor
+	log practice
+	log condition
+	log response
+	log correct
+	log response_time
+
+define logger logger_1_1_1
+	set description "Logs experimental data"
+	set auto_log "yes"
+	log display_size
+	log distractor
+	log practice
+	log condition
+	log response
+	log correct
+	log response_time
+
+define logger logger_1_2
+	set description "Logs experimental data"
+	set auto_log "yes"
+	log display_size
+	log distractor
+	log practice
+	log condition
+	log response
+	log correct
+	log response_time
+
+define logger logger_2
+	set description "Logs experimental data"
+	set auto_log "yes"
+	log display_size
+	log distractor
+	log practice
+	log condition
+	log response
+	log correct
+	log response_time
+
+define logger logger_2_1
+	set description "Logs experimental data"
+	set auto_log "yes"
+	log display_size
+	log distractor
+	log practice
+	log condition
+	log response
+	log correct
+	log response_time
+
+define logger logger_3
+	set description "Logs experimental data"
+	set auto_log "yes"
+	log display_size
+	log distractor
+	log practice
+	log condition
+	log response
+	log correct
+	log response_time
+
+define sketchpad performance_instructions
+	set start_response_interval "no"
+	set duration "keypress"
+	set description "Present instruction for the form condition"
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=18 html=yes show_if=always text="Respond as quickly and as accurately as possible" x=0.0 y=-158.0 z_index=0
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=18 html=yes show_if=always text="Sometimes there an object that is unique in color <br />from the rest of the display. It is red. <br />Ignore it, it is irrelevant to your task" x=0.0 y=-77.0 z_index=0
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=18 html=yes show_if=always text="Be sure to maintain fixation on the center point <br />throughout the task, and make a response<br />without moving your eyes from this point" x=0.0 y=32.0 z_index=0
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=18 html=yes show_if=always text="Due to the speeded nature of this task,<br />making eye movements may impair performance" x=0.0 y=142.0 z_index=0
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=18 html=yes show_if=always text="Press any key to continue ..." x=0.0 y=204.0 z_index=0
+
+define loop practice_loop
+	set skip 0
+	set repeat 1
+	set order "random"
+	set offset "no"
+	set item "block_sequence"
+	set description "Run a single practice block"
+	set cycles 1
+	set column_order "practice;condition"
+	set break_if "never"
+	setcycle 0 practice "yes"
+	setcycle 0 condition "form"
+	run block_sequence
+
+define sketchpad red_fixdot
+	set start_response_interval "no"
+	set duration 500
+	set description "Displays stimuli"
+	draw fixdot color=red show_if=always style=default x=0 y=0 z_index=0
+
+define sketchpad red_fixdot_1
+	set start_response_interval "no"
+	set duration 500
+	set description "Displays stimuli"
+	draw fixdot color=red show_if=always style=default x=0 y=0 z_index=0
+
+define sketchpad red_fixdot_1_1
+	set start_response_interval "no"
+	set duration 500
+	set description "Displays stimuli"
+	draw fixdot color=red show_if=always style=default x=0 y=0 z_index=0
+
+define sketchpad red_fixdot_1_1_1
+	set start_response_interval "no"
+	set duration 500
+	set description "Displays stimuli"
+	draw fixdot color=red show_if=always style=default x=0 y=0 z_index=0
+
+define sketchpad red_fixdot_1_2
+	set start_response_interval "no"
+	set duration 500
+	set description "Displays stimuli"
+	draw fixdot color=red show_if=always style=default x=0 y=0 z_index=0
+
+define sketchpad red_fixdot_2
+	set start_response_interval "no"
+	set duration 500
+	set description "Displays stimuli"
+	draw fixdot color=red show_if=always style=default x=0 y=0 z_index=0
+
+define sketchpad red_fixdot_2_1
+	set start_response_interval "no"
+	set duration 500
+	set description "Displays stimuli"
+	draw fixdot color=red show_if=always style=default x=0 y=0 z_index=0
+
+define sketchpad red_fixdot_3
+	set start_response_interval "no"
+	set duration 500
+	set description "Displays stimuli"
+	draw fixdot color=red show_if=always style=default x=0 y=0 z_index=0
+
+define reset_feedback reset_feedback
+	set description "Resets the feedback variables, such as 'avg_rt' and 'acc'"
+
+define reset_feedback reset_feedback_1
+	set description "Resets the feedback variables, such as 'avg_rt' and 'acc'"
+
+define inline_script search_display
+	set description "The search display"
+	___run__
+	# Show the canvas!
+	self.c.show()
+	__end__
+	___prepare__
+	# We need the random module and the math module
+	import random
+	import math
+	
+	#
+	# STEP 1
+	#
+	# Determine the shape and color of the
+	# target, distractor and non-targets
+	#
+	
+	if self.get("condition") == "color":
+	
+		# In the color condition, participants search
+		# for a green circle. The nontargets are red
+		# circles. The distractor (if present) is a
+		# red square.
+	
+		target_color = "green"
+		nontarget_color = "red"
+		distractor_color = "red"
+	
+		target_shape = "circle"
+		nontarget_shape = "circle"
+		distractor_shape = "square"
+	
+	else:
+	
+		# In the form condition, participants also 
+		# search for a green circle. The nontargets
+		# are green squares. The distractor (if
+		# present) is a red square.
+	
+		target_color = "green"
+		nontarget_color = "green"
+		distractor_color = "red"
+	
+		target_shape = "circle"
+		nontarget_shape = "square"
+		distractor_shape = "square"
+	
+	#
+	# STEP 2
+	#
+	# Create a list filled with the target, the
+	# distractor (if present) and a number of
+	# non-targets, which depends on the display
+	# size.
+	#
+	
+	# Create an empty list of stimuli
+	stimuli = []
+	
+	# Randomly pick a target orientation (0 = horzontal, 90 = vertical)
+	# and add the target to the list of stimuli
+	target_orient = random.choice( (0, 90) )
+	stimuli.append( (target_color, target_shape, target_orient) )
+	
+	# If the distractor is present, get a random orientation
+	# and add it to the list of stimuli
+	if self.get("distractor") == "present":
+		distractor_orient = random.choice( (22.5, 45, 67.5, 112.5, 135, 157.5) )
+		stimuli.append( (distractor_color, distractor_shape, distractor_orient) )
+	
+	# Add the remaining nontarget stimuli to the list
+	for i in range(self.get("display_size") - len(stimuli)):
+		nontarget_orient = random.choice( (22.5, 45, 67.5, 112.5, 135, 157.5) )
+		stimuli.append( (nontarget_color, nontarget_shape, nontarget_orient) )
+	
+	# Make sure that the order of the stimuli (which will be translated in
+	# positions) is randomized.
+	random.shuffle(stimuli)
+	
+	#
+	# STEP 3
+	#
+	# 'correct_response' is a special variable that, if it exists,
+	# is interpreted as the expected response by the
+	# keyboard_response item
+	#
+	
+	if target_orient == 0:
+		self.experiment.set("correct_response", "z")
+	else:
+		self.experiment.set("correct_response", "slash")
+	
+	#
+	# STEP 4
+	#
+	# Create an offline canvas containing all off the stimuli
+	# and a fixation dot
+	#
+		
+	# Create a new offline canvas
+	self.c = self.offline_canvas()
+	
+	# Draw a fixation dot in the center of the display
+	self.c.fixdot()
+	
+	# We want the stimuli to have some body
+	self.c.set_penwidth(3)
+	
+	radius = 250 # Distance of the stimuli from the center
+	stim_size = 40 # Size of the stimuli (the shapes)
+	line_length = 20 # Size of the lines in the shapes
+	
+	# The angular separation of the stimuli depends on the
+	# display size.
+	angular_separation = 360.0 / self.get("display_size")
+	
+	# The first stimulis is drawn at angle 0
+	angle = 0
+	
+	# Walk through all the stimuli
+	for color, shape, orient in stimuli:
+	
+		# Determine the coordinates of the stimulus
+		x = self.get("width") / 2 + radius * math.cos(math.radians(angle))
+		y = self.get("height") / 2 + radius * math.sin(math.radians(angle))
+	
+		# Set the color of the stimulus
+		self.c.set_fgcolor(color)
+	
+		# Draw the stimulus
+		if shape == "circle":
+			self.c.ellipse(x - stim_size, y - stim_size, 2 * stim_size, 2 * stim_size)
+		else:
+			self.c.rect(x - stim_size, y - stim_size, 2 * stim_size, 2 * stim_size)
+	
+		# The lines are white
+		self.c.set_fgcolor("white")
+	
+		# Determine the dx and dy, which reflect the orientation of the line
+		orient = math.radians(orient)
+		dx = line_length * math.cos(orient)
+		dy = line_length * math.sin(orient)
+	
+		# Draw the line
+		self.c.line(x - dx, y - dy, x + dx, y + dy)
+		
+		# Make sure the next stimulus is drawn at a different location
+		angle += angular_separation
+	__end__
+
+define inline_script search_display_1
+	set description "The search display"
+	___run__
+	# Show the canvas!
+	self.c.show()
+	__end__
+	___prepare__
+	# We need the random module and the math module
+	import random
+	import math
+	
+	#
+	# STEP 1
+	#
+	# Determine the shape and color of the
+	# target, distractor and non-targets
+	#
+	
+	if self.get("condition") == "color":
+	
+		# In the color condition, participants search
+		# for a green circle. The nontargets are red
+		# circles. The distractor (if present) is a
+		# red square.
+	
+		target_color = "green"
+		nontarget_color = "red"
+		distractor_color = "red"
+	
+		target_shape = "circle"
+		nontarget_shape = "circle"
+		distractor_shape = "square"
+	
+	else:
+	
+		# In the form condition, participants also 
+		# search for a green circle. The nontargets
+		# are green squares. The distractor (if
+		# present) is a red square.
+	
+		target_color = "green"
+		nontarget_color = "green"
+		distractor_color = "red"
+	
+		target_shape = "circle"
+		nontarget_shape = "square"
+		distractor_shape = "square"
+	
+	#
+	# STEP 2
+	#
+	# Create a list filled with the target, the
+	# distractor (if present) and a number of
+	# non-targets, which depends on the display
+	# size.
+	#
+	
+	# Create an empty list of stimuli
+	stimuli = []
+	
+	# Randomly pick a target orientation (0 = horzontal, 90 = vertical)
+	# and add the target to the list of stimuli
+	target_orient = random.choice( (0, 90) )
+	stimuli.append( (target_color, target_shape, target_orient) )
+	
+	# If the distractor is present, get a random orientation
+	# and add it to the list of stimuli
+	if self.get("distractor") == "present":
+		distractor_orient = random.choice( (22.5, 45, 67.5, 112.5, 135, 157.5) )
+		stimuli.append( (distractor_color, distractor_shape, distractor_orient) )
+	
+	# Add the remaining nontarget stimuli to the list
+	for i in range(self.get("display_size") - len(stimuli)):
+		nontarget_orient = random.choice( (22.5, 45, 67.5, 112.5, 135, 157.5) )
+		stimuli.append( (nontarget_color, nontarget_shape, nontarget_orient) )
+	
+	# Make sure that the order of the stimuli (which will be translated in
+	# positions) is randomized.
+	random.shuffle(stimuli)
+	
+	#
+	# STEP 3
+	#
+	# 'correct_response' is a special variable that, if it exists,
+	# is interpreted as the expected response by the
+	# keyboard_response item
+	#
+	
+	if target_orient == 0:
+		self.experiment.set("correct_response", "z")
+	else:
+		self.experiment.set("correct_response", "slash")
+	
+	#
+	# STEP 4
+	#
+	# Create an offline canvas containing all off the stimuli
+	# and a fixation dot
+	#
+		
+	# Create a new offline canvas
+	self.c = self.offline_canvas()
+	
+	# Draw a fixation dot in the center of the display
+	self.c.fixdot()
+	
+	# We want the stimuli to have some body
+	self.c.set_penwidth(3)
+	
+	radius = 250 # Distance of the stimuli from the center
+	stim_size = 40 # Size of the stimuli (the shapes)
+	line_length = 20 # Size of the lines in the shapes
+	
+	# The angular separation of the stimuli depends on the
+	# display size.
+	angular_separation = 360.0 / self.get("display_size")
+	
+	# The first stimulis is drawn at angle 0
+	angle = 0
+	
+	# Walk through all the stimuli
+	for color, shape, orient in stimuli:
+	
+		# Determine the coordinates of the stimulus
+		x = self.get("width") / 2 + radius * math.cos(math.radians(angle))
+		y = self.get("height") / 2 + radius * math.sin(math.radians(angle))
+	
+		# Set the color of the stimulus
+		self.c.set_fgcolor(color)
+	
+		# Draw the stimulus
+		if shape == "circle":
+			self.c.ellipse(x - stim_size, y - stim_size, 2 * stim_size, 2 * stim_size)
+		else:
+			self.c.rect(x - stim_size, y - stim_size, 2 * stim_size, 2 * stim_size)
+	
+		# The lines are white
+		self.c.set_fgcolor("white")
+	
+		# Determine the dx and dy, which reflect the orientation of the line
+		orient = math.radians(orient)
+		dx = line_length * math.cos(orient)
+		dy = line_length * math.sin(orient)
+	
+		# Draw the line
+		self.c.line(x - dx, y - dy, x + dx, y + dy)
+		
+		# Make sure the next stimulus is drawn at a different location
+		angle += angular_separation
+	__end__
+
+define inline_script search_display_1_1
+	set description "The search display"
+	___run__
+	# Show the canvas!
+	self.c.show()
+	__end__
+	___prepare__
+	# We need the random module and the math module
+	import random
+	import math
+	
+	#
+	# STEP 1
+	#
+	# Determine the shape and color of the
+	# target, distractor and non-targets
+	#
+	
+	if self.get("condition") == "color":
+	
+		# In the color condition, participants search
+		# for a green circle. The nontargets are red
+		# circles. The distractor (if present) is a
+		# red square.
+	
+		target_color = "green"
+		nontarget_color = "red"
+		distractor_color = "red"
+	
+		target_shape = "circle"
+		nontarget_shape = "circle"
+		distractor_shape = "square"
+	
+	else:
+	
+		# In the form condition, participants also 
+		# search for a green circle. The nontargets
+		# are green squares. The distractor (if
+		# present) is a red square.
+	
+		target_color = "green"
+		nontarget_color = "green"
+		distractor_color = "red"
+	
+		target_shape = "circle"
+		nontarget_shape = "square"
+		distractor_shape = "square"
+	
+	#
+	# STEP 2
+	#
+	# Create a list filled with the target, the
+	# distractor (if present) and a number of
+	# non-targets, which depends on the display
+	# size.
+	#
+	
+	# Create an empty list of stimuli
+	stimuli = []
+	
+	# Randomly pick a target orientation (0 = horzontal, 90 = vertical)
+	# and add the target to the list of stimuli
+	target_orient = random.choice( (0, 90) )
+	stimuli.append( (target_color, target_shape, target_orient) )
+	
+	# If the distractor is present, get a random orientation
+	# and add it to the list of stimuli
+	if self.get("distractor") == "present":
+		distractor_orient = random.choice( (22.5, 45, 67.5, 112.5, 135, 157.5) )
+		stimuli.append( (distractor_color, distractor_shape, distractor_orient) )
+	
+	# Add the remaining nontarget stimuli to the list
+	for i in range(self.get("display_size") - len(stimuli)):
+		nontarget_orient = random.choice( (22.5, 45, 67.5, 112.5, 135, 157.5) )
+		stimuli.append( (nontarget_color, nontarget_shape, nontarget_orient) )
+	
+	# Make sure that the order of the stimuli (which will be translated in
+	# positions) is randomized.
+	random.shuffle(stimuli)
+	
+	#
+	# STEP 3
+	#
+	# 'correct_response' is a special variable that, if it exists,
+	# is interpreted as the expected response by the
+	# keyboard_response item
+	#
+	
+	if target_orient == 0:
+		self.experiment.set("correct_response", "z")
+	else:
+		self.experiment.set("correct_response", "slash")
+	
+	#
+	# STEP 4
+	#
+	# Create an offline canvas containing all off the stimuli
+	# and a fixation dot
+	#
+		
+	# Create a new offline canvas
+	self.c = self.offline_canvas()
+	
+	# Draw a fixation dot in the center of the display
+	self.c.fixdot()
+	
+	# We want the stimuli to have some body
+	self.c.set_penwidth(3)
+	
+	radius = 250 # Distance of the stimuli from the center
+	stim_size = 40 # Size of the stimuli (the shapes)
+	line_length = 20 # Size of the lines in the shapes
+	
+	# The angular separation of the stimuli depends on the
+	# display size.
+	angular_separation = 360.0 / self.get("display_size")
+	
+	# The first stimulis is drawn at angle 0
+	angle = 0
+	
+	# Walk through all the stimuli
+	for color, shape, orient in stimuli:
+	
+		# Determine the coordinates of the stimulus
+		x = self.get("width") / 2 + radius * math.cos(math.radians(angle))
+		y = self.get("height") / 2 + radius * math.sin(math.radians(angle))
+	
+		# Set the color of the stimulus
+		self.c.set_fgcolor(color)
+	
+		# Draw the stimulus
+		if shape == "circle":
+			self.c.ellipse(x - stim_size, y - stim_size, 2 * stim_size, 2 * stim_size)
+		else:
+			self.c.rect(x - stim_size, y - stim_size, 2 * stim_size, 2 * stim_size)
+	
+		# The lines are white
+		self.c.set_fgcolor("white")
+	
+		# Determine the dx and dy, which reflect the orientation of the line
+		orient = math.radians(orient)
+		dx = line_length * math.cos(orient)
+		dy = line_length * math.sin(orient)
+	
+		# Draw the line
+		self.c.line(x - dx, y - dy, x + dx, y + dy)
+		
+		# Make sure the next stimulus is drawn at a different location
+		angle += angular_separation
+	__end__
+
+define inline_script search_display_1_1_1
+	set description "The search display"
+	___run__
+	# Show the canvas!
+	self.c.show()
+	__end__
+	___prepare__
+	# We need the random module and the math module
+	import random
+	import math
+	
+	#
+	# STEP 1
+	#
+	# Determine the shape and color of the
+	# target, distractor and non-targets
+	#
+	
+	if self.get("condition") == "color":
+	
+		# In the color condition, participants search
+		# for a green circle. The nontargets are red
+		# circles. The distractor (if present) is a
+		# red square.
+	
+		target_color = "green"
+		nontarget_color = "red"
+		distractor_color = "red"
+	
+		target_shape = "circle"
+		nontarget_shape = "circle"
+		distractor_shape = "square"
+	
+	else:
+	
+		# In the form condition, participants also 
+		# search for a green circle. The nontargets
+		# are green squares. The distractor (if
+		# present) is a red square.
+	
+		target_color = "green"
+		nontarget_color = "green"
+		distractor_color = "red"
+	
+		target_shape = "circle"
+		nontarget_shape = "square"
+		distractor_shape = "square"
+	
+	#
+	# STEP 2
+	#
+	# Create a list filled with the target, the
+	# distractor (if present) and a number of
+	# non-targets, which depends on the display
+	# size.
+	#
+	
+	# Create an empty list of stimuli
+	stimuli = []
+	
+	# Randomly pick a target orientation (0 = horzontal, 90 = vertical)
+	# and add the target to the list of stimuli
+	target_orient = random.choice( (0, 90) )
+	stimuli.append( (target_color, target_shape, target_orient) )
+	
+	# If the distractor is present, get a random orientation
+	# and add it to the list of stimuli
+	if self.get("distractor") == "present":
+		distractor_orient = random.choice( (22.5, 45, 67.5, 112.5, 135, 157.5) )
+		stimuli.append( (distractor_color, distractor_shape, distractor_orient) )
+	
+	# Add the remaining nontarget stimuli to the list
+	for i in range(self.get("display_size") - len(stimuli)):
+		nontarget_orient = random.choice( (22.5, 45, 67.5, 112.5, 135, 157.5) )
+		stimuli.append( (nontarget_color, nontarget_shape, nontarget_orient) )
+	
+	# Make sure that the order of the stimuli (which will be translated in
+	# positions) is randomized.
+	random.shuffle(stimuli)
+	
+	#
+	# STEP 3
+	#
+	# 'correct_response' is a special variable that, if it exists,
+	# is interpreted as the expected response by the
+	# keyboard_response item
+	#
+	
+	if target_orient == 0:
+		self.experiment.set("correct_response", "z")
+	else:
+		self.experiment.set("correct_response", "slash")
+	
+	#
+	# STEP 4
+	#
+	# Create an offline canvas containing all off the stimuli
+	# and a fixation dot
+	#
+		
+	# Create a new offline canvas
+	self.c = self.offline_canvas()
+	
+	# Draw a fixation dot in the center of the display
+	self.c.fixdot()
+	
+	# We want the stimuli to have some body
+	self.c.set_penwidth(3)
+	
+	radius = 250 # Distance of the stimuli from the center
+	stim_size = 40 # Size of the stimuli (the shapes)
+	line_length = 20 # Size of the lines in the shapes
+	
+	# The angular separation of the stimuli depends on the
+	# display size.
+	angular_separation = 360.0 / self.get("display_size")
+	
+	# The first stimulis is drawn at angle 0
+	angle = 0
+	
+	# Walk through all the stimuli
+	for color, shape, orient in stimuli:
+	
+		# Determine the coordinates of the stimulus
+		x = self.get("width") / 2 + radius * math.cos(math.radians(angle))
+		y = self.get("height") / 2 + radius * math.sin(math.radians(angle))
+	
+		# Set the color of the stimulus
+		self.c.set_fgcolor(color)
+	
+		# Draw the stimulus
+		if shape == "circle":
+			self.c.ellipse(x - stim_size, y - stim_size, 2 * stim_size, 2 * stim_size)
+		else:
+			self.c.rect(x - stim_size, y - stim_size, 2 * stim_size, 2 * stim_size)
+	
+		# The lines are white
+		self.c.set_fgcolor("white")
+	
+		# Determine the dx and dy, which reflect the orientation of the line
+		orient = math.radians(orient)
+		dx = line_length * math.cos(orient)
+		dy = line_length * math.sin(orient)
+	
+		# Draw the line
+		self.c.line(x - dx, y - dy, x + dx, y + dy)
+		
+		# Make sure the next stimulus is drawn at a different location
+		angle += angular_separation
+	__end__
+
+define inline_script search_display_1_2
+	set description "The search display"
+	___run__
+	# Show the canvas!
+	self.c.show()
+	__end__
+	___prepare__
+	# We need the random module and the math module
+	import random
+	import math
+	
+	#
+	# STEP 1
+	#
+	# Determine the shape and color of the
+	# target, distractor and non-targets
+	#
+	
+	if self.get("condition") == "color":
+	
+		# In the color condition, participants search
+		# for a green circle. The nontargets are red
+		# circles. The distractor (if present) is a
+		# red square.
+	
+		target_color = "green"
+		nontarget_color = "red"
+		distractor_color = "red"
+	
+		target_shape = "circle"
+		nontarget_shape = "circle"
+		distractor_shape = "square"
+	
+	else:
+	
+		# In the form condition, participants also 
+		# search for a green circle. The nontargets
+		# are green squares. The distractor (if
+		# present) is a red square.
+	
+		target_color = "green"
+		nontarget_color = "green"
+		distractor_color = "red"
+	
+		target_shape = "circle"
+		nontarget_shape = "square"
+		distractor_shape = "square"
+	
+	#
+	# STEP 2
+	#
+	# Create a list filled with the target, the
+	# distractor (if present) and a number of
+	# non-targets, which depends on the display
+	# size.
+	#
+	
+	# Create an empty list of stimuli
+	stimuli = []
+	
+	# Randomly pick a target orientation (0 = horzontal, 90 = vertical)
+	# and add the target to the list of stimuli
+	target_orient = random.choice( (0, 90) )
+	stimuli.append( (target_color, target_shape, target_orient) )
+	
+	# If the distractor is present, get a random orientation
+	# and add it to the list of stimuli
+	if self.get("distractor") == "present":
+		distractor_orient = random.choice( (22.5, 45, 67.5, 112.5, 135, 157.5) )
+		stimuli.append( (distractor_color, distractor_shape, distractor_orient) )
+	
+	# Add the remaining nontarget stimuli to the list
+	for i in range(self.get("display_size") - len(stimuli)):
+		nontarget_orient = random.choice( (22.5, 45, 67.5, 112.5, 135, 157.5) )
+		stimuli.append( (nontarget_color, nontarget_shape, nontarget_orient) )
+	
+	# Make sure that the order of the stimuli (which will be translated in
+	# positions) is randomized.
+	random.shuffle(stimuli)
+	
+	#
+	# STEP 3
+	#
+	# 'correct_response' is a special variable that, if it exists,
+	# is interpreted as the expected response by the
+	# keyboard_response item
+	#
+	
+	if target_orient == 0:
+		self.experiment.set("correct_response", "z")
+	else:
+		self.experiment.set("correct_response", "slash")
+	
+	#
+	# STEP 4
+	#
+	# Create an offline canvas containing all off the stimuli
+	# and a fixation dot
+	#
+		
+	# Create a new offline canvas
+	self.c = self.offline_canvas()
+	
+	# Draw a fixation dot in the center of the display
+	self.c.fixdot()
+	
+	# We want the stimuli to have some body
+	self.c.set_penwidth(3)
+	
+	radius = 250 # Distance of the stimuli from the center
+	stim_size = 40 # Size of the stimuli (the shapes)
+	line_length = 20 # Size of the lines in the shapes
+	
+	# The angular separation of the stimuli depends on the
+	# display size.
+	angular_separation = 360.0 / self.get("display_size")
+	
+	# The first stimulis is drawn at angle 0
+	angle = 0
+	
+	# Walk through all the stimuli
+	for color, shape, orient in stimuli:
+	
+		# Determine the coordinates of the stimulus
+		x = self.get("width") / 2 + radius * math.cos(math.radians(angle))
+		y = self.get("height") / 2 + radius * math.sin(math.radians(angle))
+	
+		# Set the color of the stimulus
+		self.c.set_fgcolor(color)
+	
+		# Draw the stimulus
+		if shape == "circle":
+			self.c.ellipse(x - stim_size, y - stim_size, 2 * stim_size, 2 * stim_size)
+		else:
+			self.c.rect(x - stim_size, y - stim_size, 2 * stim_size, 2 * stim_size)
+	
+		# The lines are white
+		self.c.set_fgcolor("white")
+	
+		# Determine the dx and dy, which reflect the orientation of the line
+		orient = math.radians(orient)
+		dx = line_length * math.cos(orient)
+		dy = line_length * math.sin(orient)
+	
+		# Draw the line
+		self.c.line(x - dx, y - dy, x + dx, y + dy)
+		
+		# Make sure the next stimulus is drawn at a different location
+		angle += angular_separation
+	__end__
+
+define inline_script search_display_2
+	set description "The search display"
+	___run__
+	# Show the canvas!
+	self.c.show()
+	__end__
+	___prepare__
+	# We need the random module and the math module
+	import random
+	import math
+	
+	#
+	# STEP 1
+	#
+	# Determine the shape and color of the
+	# target, distractor and non-targets
+	#
+	
+	if self.get("condition") == "color":
+	
+		# In the color condition, participants search
+		# for a green circle. The nontargets are red
+		# circles. The distractor (if present) is a
+		# red square.
+	
+		target_color = "green"
+		nontarget_color = "red"
+		distractor_color = "red"
+	
+		target_shape = "circle"
+		nontarget_shape = "circle"
+		distractor_shape = "square"
+	
+	else:
+	
+		# In the form condition, participants also 
+		# search for a green circle. The nontargets
+		# are green squares. The distractor (if
+		# present) is a red square.
+	
+		target_color = "green"
+		nontarget_color = "green"
+		distractor_color = "red"
+	
+		target_shape = "circle"
+		nontarget_shape = "square"
+		distractor_shape = "square"
+	
+	#
+	# STEP 2
+	#
+	# Create a list filled with the target, the
+	# distractor (if present) and a number of
+	# non-targets, which depends on the display
+	# size.
+	#
+	
+	# Create an empty list of stimuli
+	stimuli = []
+	
+	# Randomly pick a target orientation (0 = horzontal, 90 = vertical)
+	# and add the target to the list of stimuli
+	target_orient = random.choice( (0, 90) )
+	stimuli.append( (target_color, target_shape, target_orient) )
+	
+	# If the distractor is present, get a random orientation
+	# and add it to the list of stimuli
+	if self.get("distractor") == "present":
+		distractor_orient = random.choice( (22.5, 45, 67.5, 112.5, 135, 157.5) )
+		stimuli.append( (distractor_color, distractor_shape, distractor_orient) )
+	
+	# Add the remaining nontarget stimuli to the list
+	for i in range(self.get("display_size") - len(stimuli)):
+		nontarget_orient = random.choice( (22.5, 45, 67.5, 112.5, 135, 157.5) )
+		stimuli.append( (nontarget_color, nontarget_shape, nontarget_orient) )
+	
+	# Make sure that the order of the stimuli (which will be translated in
+	# positions) is randomized.
+	random.shuffle(stimuli)
+	
+	#
+	# STEP 3
+	#
+	# 'correct_response' is a special variable that, if it exists,
+	# is interpreted as the expected response by the
+	# keyboard_response item
+	#
+	
+	if target_orient == 0:
+		self.experiment.set("correct_response", "z")
+	else:
+		self.experiment.set("correct_response", "slash")
+	
+	#
+	# STEP 4
+	#
+	# Create an offline canvas containing all off the stimuli
+	# and a fixation dot
+	#
+		
+	# Create a new offline canvas
+	self.c = self.offline_canvas()
+	
+	# Draw a fixation dot in the center of the display
+	self.c.fixdot()
+	
+	# We want the stimuli to have some body
+	self.c.set_penwidth(3)
+	
+	radius = 250 # Distance of the stimuli from the center
+	stim_size = 40 # Size of the stimuli (the shapes)
+	line_length = 20 # Size of the lines in the shapes
+	
+	# The angular separation of the stimuli depends on the
+	# display size.
+	angular_separation = 360.0 / self.get("display_size")
+	
+	# The first stimulis is drawn at angle 0
+	angle = 0
+	
+	# Walk through all the stimuli
+	for color, shape, orient in stimuli:
+	
+		# Determine the coordinates of the stimulus
+		x = self.get("width") / 2 + radius * math.cos(math.radians(angle))
+		y = self.get("height") / 2 + radius * math.sin(math.radians(angle))
+	
+		# Set the color of the stimulus
+		self.c.set_fgcolor(color)
+	
+		# Draw the stimulus
+		if shape == "circle":
+			self.c.ellipse(x - stim_size, y - stim_size, 2 * stim_size, 2 * stim_size)
+		else:
+			self.c.rect(x - stim_size, y - stim_size, 2 * stim_size, 2 * stim_size)
+	
+		# The lines are white
+		self.c.set_fgcolor("white")
+	
+		# Determine the dx and dy, which reflect the orientation of the line
+		orient = math.radians(orient)
+		dx = line_length * math.cos(orient)
+		dy = line_length * math.sin(orient)
+	
+		# Draw the line
+		self.c.line(x - dx, y - dy, x + dx, y + dy)
+		
+		# Make sure the next stimulus is drawn at a different location
+		angle += angular_separation
+	__end__
+
+define inline_script search_display_2_1
+	set description "The search display"
+	___run__
+	# Show the canvas!
+	self.c.show()
+	__end__
+	___prepare__
+	# We need the random module and the math module
+	import random
+	import math
+	
+	#
+	# STEP 1
+	#
+	# Determine the shape and color of the
+	# target, distractor and non-targets
+	#
+	
+	if self.get("condition") == "color":
+	
+		# In the color condition, participants search
+		# for a green circle. The nontargets are red
+		# circles. The distractor (if present) is a
+		# red square.
+	
+		target_color = "green"
+		nontarget_color = "red"
+		distractor_color = "red"
+	
+		target_shape = "circle"
+		nontarget_shape = "circle"
+		distractor_shape = "square"
+	
+	else:
+	
+		# In the form condition, participants also 
+		# search for a green circle. The nontargets
+		# are green squares. The distractor (if
+		# present) is a red square.
+	
+		target_color = "green"
+		nontarget_color = "green"
+		distractor_color = "red"
+	
+		target_shape = "circle"
+		nontarget_shape = "square"
+		distractor_shape = "square"
+	
+	#
+	# STEP 2
+	#
+	# Create a list filled with the target, the
+	# distractor (if present) and a number of
+	# non-targets, which depends on the display
+	# size.
+	#
+	
+	# Create an empty list of stimuli
+	stimuli = []
+	
+	# Randomly pick a target orientation (0 = horzontal, 90 = vertical)
+	# and add the target to the list of stimuli
+	target_orient = random.choice( (0, 90) )
+	stimuli.append( (target_color, target_shape, target_orient) )
+	
+	# If the distractor is present, get a random orientation
+	# and add it to the list of stimuli
+	if self.get("distractor") == "present":
+		distractor_orient = random.choice( (22.5, 45, 67.5, 112.5, 135, 157.5) )
+		stimuli.append( (distractor_color, distractor_shape, distractor_orient) )
+	
+	# Add the remaining nontarget stimuli to the list
+	for i in range(self.get("display_size") - len(stimuli)):
+		nontarget_orient = random.choice( (22.5, 45, 67.5, 112.5, 135, 157.5) )
+		stimuli.append( (nontarget_color, nontarget_shape, nontarget_orient) )
+	
+	# Make sure that the order of the stimuli (which will be translated in
+	# positions) is randomized.
+	random.shuffle(stimuli)
+	
+	#
+	# STEP 3
+	#
+	# 'correct_response' is a special variable that, if it exists,
+	# is interpreted as the expected response by the
+	# keyboard_response item
+	#
+	
+	if target_orient == 0:
+		self.experiment.set("correct_response", "z")
+	else:
+		self.experiment.set("correct_response", "slash")
+	
+	#
+	# STEP 4
+	#
+	# Create an offline canvas containing all off the stimuli
+	# and a fixation dot
+	#
+		
+	# Create a new offline canvas
+	self.c = self.offline_canvas()
+	
+	# Draw a fixation dot in the center of the display
+	self.c.fixdot()
+	
+	# We want the stimuli to have some body
+	self.c.set_penwidth(3)
+	
+	radius = 250 # Distance of the stimuli from the center
+	stim_size = 40 # Size of the stimuli (the shapes)
+	line_length = 20 # Size of the lines in the shapes
+	
+	# The angular separation of the stimuli depends on the
+	# display size.
+	angular_separation = 360.0 / self.get("display_size")
+	
+	# The first stimulis is drawn at angle 0
+	angle = 0
+	
+	# Walk through all the stimuli
+	for color, shape, orient in stimuli:
+	
+		# Determine the coordinates of the stimulus
+		x = self.get("width") / 2 + radius * math.cos(math.radians(angle))
+		y = self.get("height") / 2 + radius * math.sin(math.radians(angle))
+	
+		# Set the color of the stimulus
+		self.c.set_fgcolor(color)
+	
+		# Draw the stimulus
+		if shape == "circle":
+			self.c.ellipse(x - stim_size, y - stim_size, 2 * stim_size, 2 * stim_size)
+		else:
+			self.c.rect(x - stim_size, y - stim_size, 2 * stim_size, 2 * stim_size)
+	
+		# The lines are white
+		self.c.set_fgcolor("white")
+	
+		# Determine the dx and dy, which reflect the orientation of the line
+		orient = math.radians(orient)
+		dx = line_length * math.cos(orient)
+		dy = line_length * math.sin(orient)
+	
+		# Draw the line
+		self.c.line(x - dx, y - dy, x + dx, y + dy)
+		
+		# Make sure the next stimulus is drawn at a different location
+		angle += angular_separation
+	__end__
+
+define inline_script search_display_3
+	set description "The search display"
+	___run__
+	# Show the canvas!
+	self.c.show()
+	__end__
+	___prepare__
+	# We need the random module and the math module
+	import random
+	import math
+	
+	#
+	# STEP 1
+	#
+	# Determine the shape and color of the
+	# target, distractor and non-targets
+	#
+	
+	if self.get("condition") == "color":
+	
+		# In the color condition, participants search
+		# for a green circle. The nontargets are red
+		# circles. The distractor (if present) is a
+		# red square.
+	
+		target_color = "green"
+		nontarget_color = "red"
+		distractor_color = "red"
+	
+		target_shape = "circle"
+		nontarget_shape = "circle"
+		distractor_shape = "square"
+	
+	else:
+	
+		# In the form condition, participants also 
+		# search for a green circle. The nontargets
+		# are green squares. The distractor (if
+		# present) is a red square.
+	
+		target_color = "green"
+		nontarget_color = "green"
+		distractor_color = "red"
+	
+		target_shape = "circle"
+		nontarget_shape = "square"
+		distractor_shape = "square"
+	
+	#
+	# STEP 2
+	#
+	# Create a list filled with the target, the
+	# distractor (if present) and a number of
+	# non-targets, which depends on the display
+	# size.
+	#
+	
+	# Create an empty list of stimuli
+	stimuli = []
+	
+	# Randomly pick a target orientation (0 = horzontal, 90 = vertical)
+	# and add the target to the list of stimuli
+	target_orient = random.choice( (0, 90) )
+	stimuli.append( (target_color, target_shape, target_orient) )
+	
+	# If the distractor is present, get a random orientation
+	# and add it to the list of stimuli
+	if self.get("distractor") == "present":
+		distractor_orient = random.choice( (22.5, 45, 67.5, 112.5, 135, 157.5) )
+		stimuli.append( (distractor_color, distractor_shape, distractor_orient) )
+	
+	# Add the remaining nontarget stimuli to the list
+	for i in range(self.get("display_size") - len(stimuli)):
+		nontarget_orient = random.choice( (22.5, 45, 67.5, 112.5, 135, 157.5) )
+		stimuli.append( (nontarget_color, nontarget_shape, nontarget_orient) )
+	
+	# Make sure that the order of the stimuli (which will be translated in
+	# positions) is randomized.
+	random.shuffle(stimuli)
+	
+	#
+	# STEP 3
+	#
+	# 'correct_response' is a special variable that, if it exists,
+	# is interpreted as the expected response by the
+	# keyboard_response item
+	#
+	
+	if target_orient == 0:
+		self.experiment.set("correct_response", "z")
+	else:
+		self.experiment.set("correct_response", "slash")
+	
+	#
+	# STEP 4
+	#
+	# Create an offline canvas containing all off the stimuli
+	# and a fixation dot
+	#
+		
+	# Create a new offline canvas
+	self.c = self.offline_canvas()
+	
+	# Draw a fixation dot in the center of the display
+	self.c.fixdot()
+	
+	# We want the stimuli to have some body
+	self.c.set_penwidth(3)
+	
+	radius = 250 # Distance of the stimuli from the center
+	stim_size = 40 # Size of the stimuli (the shapes)
+	line_length = 20 # Size of the lines in the shapes
+	
+	# The angular separation of the stimuli depends on the
+	# display size.
+	angular_separation = 360.0 / self.get("display_size")
+	
+	# The first stimulis is drawn at angle 0
+	angle = 0
+	
+	# Walk through all the stimuli
+	for color, shape, orient in stimuli:
+	
+		# Determine the coordinates of the stimulus
+		x = self.get("width") / 2 + radius * math.cos(math.radians(angle))
+		y = self.get("height") / 2 + radius * math.sin(math.radians(angle))
+	
+		# Set the color of the stimulus
+		self.c.set_fgcolor(color)
+	
+		# Draw the stimulus
+		if shape == "circle":
+			self.c.ellipse(x - stim_size, y - stim_size, 2 * stim_size, 2 * stim_size)
+		else:
+			self.c.rect(x - stim_size, y - stim_size, 2 * stim_size, 2 * stim_size)
+	
+		# The lines are white
+		self.c.set_fgcolor("white")
+	
+		# Determine the dx and dy, which reflect the orientation of the line
+		orient = math.radians(orient)
+		dx = line_length * math.cos(orient)
+		dy = line_length * math.sin(orient)
+	
+		# Draw the line
+		self.c.line(x - dx, y - dy, x + dx, y + dy)
+		
+		# Make sure the next stimulus is drawn at a different location
+		angle += angular_separation
+	__end__
+
+define sketchpad sketchpad
+	set start_response_interval "no"
+	set duration "keypress"
+	set description "Present instruction for the form condition"
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=18 html=yes show_if=always text="Respond as quickly and as accurately as possible" x=0 y=-64 z_index=0
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=18 html=yes show_if=always text="Be sure to maintain fixation on the center point throughout the task, and make a response without moving your eyes from this point" x=0 y=0 z_index=0
+
+define sketchpad start_practice
+	set start_response_interval "no"
+	set duration "keypress"
+	set description "Displays stimuli"
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=18 html=yes show_if=always text="You will start with a short practice phase" x=0 y=-64 z_index=0
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=18 html=yes show_if=always text="Press any key to begin ..." x=0 y=64 z_index=0
+
+define sequence trial_sequence
+	set flush_keyboard "yes"
+	set description "A single trial"
+	run cross always
+	run fixdot always
+	run search_display always
+	run keyboard_response always
+	run red_fixdot "[correct] = 0"
+	run green_fixdot "[correct] = 1"
+	run logger always
+
+define sequence trial_sequence_1
+	set flush_keyboard "yes"
+	set description "A single trial"
+	run cross_1 always
+	run fixdot_1 always
+	run search_display_1 always
+	run keyboard_response_1 always
+	run red_fixdot_1 "[correct] = 0"
+	run green_fixdot_1 "[correct] = 1"
+	run logger_1 always
+
+define sequence trial_sequence_1_1
+	set flush_keyboard "yes"
+	set description "A single trial"
+	run cross_1_1 always
+	run fixdot_1_1 always
+	run search_display_1_1 always
+	run keyboard_response_1_1 always
+	run red_fixdot_1_1 "[correct] = 0"
+	run green_fixdot_1_1 "[correct] = 1"
+	run logger_1_1 always
+
+define sequence trial_sequence_1_1_1
+	set flush_keyboard "yes"
+	set description "A single trial"
+	run cross_1_1_1 always
+	run fixdot_1_1_1 always
+	run search_display_1_1_1 always
+	run keyboard_response_1_1_1 always
+	run red_fixdot_1_1_1 "[correct] = 0"
+	run green_fixdot_1_1_1 "[correct] = 1"
+	run logger_1_1_1 always
+
+define sequence trial_sequence_1_2
+	set flush_keyboard "yes"
+	set description "A single trial"
+	run cross_1_2 always
+	run fixdot_1_2 always
+	run search_display_1_2 always
+	run keyboard_response_1_2 always
+	run red_fixdot_1_2 "[correct] = 0"
+	run green_fixdot_1_2 "[correct] = 1"
+	run logger_1_2 always
+
+define sequence trial_sequence_2
+	set flush_keyboard "yes"
+	set description "A single trial"
+	run cross_2 always
+	run fixdot_2 always
+	run search_display_2 always
+	run keyboard_response_2 always
+	run red_fixdot_2 "[correct] = 0"
+	run green_fixdot_2 "[correct] = 1"
+	run logger_2 always
+
+define sequence trial_sequence_2_1
+	set flush_keyboard "yes"
+	set description "A single trial"
+	run cross_2_1 always
+	run fixdot_2_1 always
+	run search_display_2_1 always
+	run keyboard_response_2_1 always
+	run red_fixdot_2_1 "[correct] = 0"
+	run green_fixdot_2_1 "[correct] = 1"
+	run logger_2_1 always
+
+define sequence trial_sequence_3
+	set flush_keyboard "yes"
+	set description "A single trial"
+	run cross_3 always
+	run fixdot_3 always
+	run search_display_3 always
+	run keyboard_response_3 always
+	run red_fixdot_3 "[correct] = 0"
+	run green_fixdot_3 "[correct] = 1"
+	run logger_3 always
+
