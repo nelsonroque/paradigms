@@ -1,0 +1,18 @@
+DEBUG:0|int
+TRACKER_CONNECTED:1|int
+CALIBRATE:0|int
+LETTER_SIZE:69|int
+NUM_POS_OF_INTEREST:2|int
+STREAM_LENGTH:80|int
+STREAM_SPEED_S:0.10|float
+TARG_COLORS:black,white|strlist
+DIST_POSITIONS:beforeTarget,afterTarget|strlist
+BLOCK_MULTIPLIER:0|int
+BLOCK_MULTIPLIER_PRAC:1|int
+NUM_CALIBRATION_TARGETS:9|int
+CALIBRATION_FIX_TARGET_TIME_MS:1000|int
+LAG_1:0.5|float
+LAG_2:0.55|float
+LAG_3:0.6|float
+INSTRUCTIONS:In this task, you will be presented with a rapid stream of letters.***Before each trial begins, you will be prompted to the color of the letter you should be looking for.***Once a trial is complete, enter the letter you saw, using the keyboard.***Accuracy is important, not speed.***EXPERIMENT TRIALS ARE NEXT|strlist2
+INSTRUCTIONS_PRAC:In this task, you will be presented with a rapid stream of letters.***Before each trial begins, you will be prompted to the color of the letter you should be looking for.***Once a trial is complete, enter the letter you saw, using the keyboard.***Accuracy is important, not speed.***PRACTICE TRIALS ARE NEXT|strlist2
