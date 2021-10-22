@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <meta charset="utf-8">
+        
+        <!-- for mobile-friendly (responsive) page -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <!-- site page title -->
+        <title>Chatbot | Global Cognition Project</title>
+        
+        <!-- load stylesheets -->
+		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="css/bot.css">
+
+		<!-- load favicon -->
+		<link rel="icon" type="image/png" href="img/brain.png">
+		<!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">-->
+	</head>
+	<body>
+		<div id="wrapper">
+
+			<!-- area containing chat messages (to/from) -->
+			<div id="chat-area">
+				<div id="start-screen">
+					<h1>Instructions</h1>
+					<p>You will have a conversation with a Robot who will ask you a set of questions. Using your keyboard, type your responses.</p>
+					<p>By beginning the assessment, you are agreeing to the terms outlined below.</p>
+					<hr>
+					<p><u><b>Every single keystroke entered once the assessment begins will be sent over a secure connection (https) to a secure server.</b></u></p>
+    				<p><u><b>Do not enter any sensitive or personally identifying information into this chat system.</b></u></p>
+    				<hr>
+					<p>To begin the assessment, press the `Enter` key on your keyboard, or press the Brain button below.</p>
+					<div id="startButton">
+						<img src="img/brain.png" width=24%>
+					</div>
+				</div>
+			</div>
+
+			<!-- user text entry box -->
+			<div id="compose-area">
+				<textarea id="composer" class="text-input" type="text" autofocus="autofocus"></textarea>
+				<div id="sendButton">
+				  <button>↵</button>
+				</div>
+			</div>
+		</div>
+
+		<!-- run the bot engine -->
+        <script src="js/variables.js"></script>
+        <script src="js/functions.js"></script>
+		<script src="js/listener.js"></script>
+	</body>
+</html>

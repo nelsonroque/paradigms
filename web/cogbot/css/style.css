@@ -1,0 +1,54 @@
+/* --------------------------------------------------*/
+/* GENERAL ------------------------------------------*/
+/* --------------------------------------------------*/
+
+html {
+  height: 100%;
+  box-sizing: border-box;
+  font-family: "Open Sans", sans-serif;
+}
+
+body {
+  text-align: center; 
+  box-sizing: border-box;
+  font-size: 100%;
+  background-color: white;
+  height: 100%;
+  padding: 0.42em;
+}
+
+.hero {
+  margin-left: 4em;
+  margin-right: 4em;
+  padding: 4em;
+}
+
+.footer {
+  margin-top: 1em;
+}
+
+/* -----------------------*/
+/* BUTTONS ---------------*/
+/* -----------------------*/
+
+.smooth {
+	background-color: #4CAF50;
+	border: none;
+	color: white;
+	padding: 20px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	border-radius: 12px;
+}
+
+/* -----------------------*/
+/* IMAGES ----------------*/
+/* -----------------------*/
+
+.responsive {
+  width: 100%;
+  height: auto;
+}
